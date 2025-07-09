@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI-powered shopping assistant with voice commands, visual recognition, and accessibility features" />
+    <meta name="keywords" content="voice shopping, AI assistant, accessibility, product search, smart shopping" />
+    <meta name="author" content="Voice-to-Vision Team" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#3b82f6" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Voice-to-Vision" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://voice-to-vision.app/" />
+    <meta property="og:title" content="Voice-to-Vision Shopping Assistant" />
+    <meta property="og:description" content="AI-powered shopping assistant with voice commands and visual recognition" />
+    <meta property="og:image" content="/og-image.jpg" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://voice-to-vision.app/" />
+    <meta property="twitter:title" content="Voice-to-Vision Shopping Assistant" />
+    <meta property="twitter:description" content="AI-powered shopping assistant with voice commands and visual recognition" />
+    <meta property="twitter:image" content="/og-image.jpg" />
+    
+    <title>Voice-to-Vision Shopping Assistant</title>
+    
+    <script>
+      // Register service worker for PWA
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('SW registered: ', registration);
+            })
+            .catch(registrationError => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
