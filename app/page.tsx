@@ -243,10 +243,10 @@ return (
           {[
             {
               icon: <Heart className="w-8 h-8" />,
-              title: "Empathy Engine",
+              title: "Product Explainer",
               description:
                 "AI detects your mood and provides caring, personalized suggestions with emotional intelligence.",
-              href: "/features/empathy-engine",
+              href: "/features/product-explainer",
             },
             {
               icon: <Eye className="w-8 h-8" />,
@@ -335,7 +335,7 @@ return (
               {
                 step: "02",
                 title: "AI Processing",
-                description: "Our empathy engine analyzes your mood and preferences for personalized suggestions",
+                description: "Our Product Explainer analyzes your mood and preferences for personalized suggestions",
                 icon: <Zap className="w-6 h-6" />,
                 side: "right",
               },
@@ -607,8 +607,8 @@ return (
             <h4 className="font-semibold mb-4">Features</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/features/empathy-engine" className="transition-colors">
-                  Empathy Engine
+                <Link href="/features/product-explainer" className="transition-colors">
+                  Product Explainer 
                 </Link>
               </li>
               <li>
