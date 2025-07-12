@@ -1,0 +1,137 @@
+{
+  "terms": [
+    {
+      "id": "persil-liquid-laundry-detergent",
+      "name": "Persil Liquid Laundry Detergent, Intense Fresh, 96 Loads",
+      "explanation": "Deep-clean detergent known for powerful stain removal and fresh scent.",
+      "simpleExplanation": "Detergent that removes tough stains and leaves clothes smelling great.",
+      "category": "household"
+    },
+    {
+      "id": "glad-forceflex-trash-bags",
+      "name": "Glad ForceFlex Heavy Duty 30‑Gallon Trash Bags, 40 Count",
+      "explanation": "Durable, stretchable trash bags that resist punctures and tears.",
+      "simpleExplanation": "Strong trash bags good for heavy garbage without ripping.",
+      "category": "household"
+    },
+    {
+      "id": "igloo-50qt-ice-chest-cooler",
+      "name": "Igloo 50 qt Overland Ice Chest Cooler, Green",
+      "explanation": "High-capacity cooler designed to keep items cold for hours.",
+      "simpleExplanation": "Big cooler that keeps food and drinks cold at events or trips.",
+      "category": "outdoors"
+    },
+    {
+      "id": "six-star-whey-protein-powder",
+      "name": "Six Star 100% Whey Protein Powder, Cookies & Cream, 1.85 lbs",
+      "explanation": "Protein supplement to support muscle recovery with a delicious taste.",
+      "simpleExplanation": "Protein shake mix that helps muscles recover and tastes like cookies.",
+      "category": "health"
+    },
+    {
+      "id": "dossier-vanilla-perfume",
+      "name": "Dossier Ambery Vanilla Eau de Parfum, 1.7 oz",
+      "explanation": "Affordable perfume with rich vanilla and warm amber notes.",
+      "simpleExplanation": "Vanilla-scented perfume that smells warm and sweet.",
+      "category": "beauty"
+    },
+    {
+      "id": "native-coconut-vanilla-body-wash",
+      "name": "Native Body Wash, Coconut & Vanilla, 36 oz",
+      "explanation": "Moisturizing, sulfate-free body wash with a soothing scent.",
+      "simpleExplanation": "Soap that washes skin gently and smells like coconut and vanilla.",
+      "category": "personal care"
+    },
+    {
+      "id": "lava-lamp-replacement-bulb",
+      "name": "Lava Lamp Replacement Bulb, 100 Watt",
+      "explanation": "Special bulb designed for use in classic lava lamps.",
+      "simpleExplanation": "Bulb for your lava lamp to make it glow and work again.",
+      "category": "home"
+    },
+    {
+      "id": "better-homes-bath-towel-set",
+      "name": "Better Homes & Gardens Cotton Bath Towel Set, 6 Piece",
+      "explanation": "Soft and absorbent towel set made from premium cotton.",
+      "simpleExplanation": "Comfy towels that dry you well and feel soft.",
+      "category": "home"
+    },
+    {
+      "id": "crest-pro-health-toothpaste",
+      "name": "Crest Pro-Health Advanced Toothpaste, 7 oz",
+      "explanation": "Multi-benefit toothpaste for cavity protection and fresh breath.",
+      "simpleExplanation": "Daily toothpaste that cleans teeth and keeps breath fresh.",
+      "category": "personal care"
+    },
+    {
+      "id": "arm-hammer-laundry-detergent",
+      "name": "Arm & Hammer Clean Burst Laundry Detergent, 150 oz",
+      "explanation": "Large-bottle detergent with a crisp, clean scent.",
+      "simpleExplanation": "Big jug of soap for clothes that smells fresh.",
+      "category": "household"
+    },
+    {
+      "id": "rawlings-soft-baseball-glove",
+      "name": "Rawlings Soft-handed Baseball Glove, Right-Hand Throw",
+      "explanation": "Youth-sized baseball glove made with soft leather for easy break-in.",
+      "simpleExplanation": "Easy-to-use glove for young players to catch the ball well.",
+      "category": "sports"
+    },
+    {
+      "id": "ninja-foodi-air-fryer",
+      "name": "Ninja Foodi 5‑in‑1 Air Fryer, 4 Quart",
+      "explanation": "Air fryer that crisps food with little oil and has multiple cooking modes.",
+      "simpleExplanation": "Cook crispy snacks fast with less oil in this small fryer.",
+      "category": "kitchen"
+    },
+    {
+      "id": "keurig-k-classic-coffee-maker",
+      "name": "Keurig K‑Classic Single Serve Coffee Maker",
+      "explanation": "Easy, single-serve coffee brewer compatible with K-Cups.",
+      "simpleExplanation": "Machine that makes one cup of coffee fast with pods.",
+      "category": "kitchen"
+    },
+    {
+      "id": "dr-teals-epsom-salt-relaxing",
+      "name": "Dr. Teal’s Epsom Salt, Lavender Scent, 36 oz",
+      "explanation": "Soothing Epsom salts infused with lavender for a relaxing bath.",
+      "simpleExplanation": "Bath salts that help you relax with a nice lavender scent.",
+      "category": "personal care"
+    },
+    {
+      "id": "colgate-mouthwash",
+      "name": "Colgate Total Mouthwash, Fresh Mint, 500 ml",
+      "explanation": "Antibacterial mouthwash to kill germs and freshen breath.",
+      "simpleExplanation": "Rinse that cleans your mouth and makes breath fresh.",
+      "category": "personal care"
+    },
+    {
+      "id": "bethy-linen-bed-sheet-set",
+      "name": "Better Homes & Gardens Queen Bed Sheet Set, 6 Piece",
+      "explanation": "Soft and durable cotton sheet set with easy care design.",
+      "simpleExplanation": "Nice and comfy sheets for your bed that wash easily.",
+      "category": "home"
+    },
+    {
+      "id": "otis-rockingham-cheese-block",
+      "name": "Great Value Smoked Cheddar Cheese Block, 8 oz",
+      "explanation": "Smoky cheddar cheese perfect for sandwiches, snacks, or melting.",
+      "simpleExplanation": "Tasty cheese that goes great on sandwiches and melts well.",
+      "category": "food"
+    },
+    {
+      "id": "smartwater-bottles-1l",
+      "name": "Smartwater, Electrolyte Enhanced Bottled Water, 1 Liter, 12 Pack",
+      "explanation": "Electrolyte-enhanced water in a sleek bottle design.",
+      "simpleExplanation": "Clean water that helps you feel hydrated and refreshed.",
+      "category": "beverages"
+    },
+    {
+      "id": "crest-sonic-electric-toothbrush",
+      "name": "Oral-B Pro 1000 Electric Toothbrush",
+      "explanation": "Electric toothbrush with built-in timer and pressure sensor.",
+      "simpleExplanation": "Toothbrush that cleans your teeth better with no guesswork.",
+      "category": "personal care"
+    }
+  ]
+}
