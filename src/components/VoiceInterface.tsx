@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
+import { Mic, MicOff, Volume2, VolumeX, Sparkles } from 'lucide-react';
 import { useSpeechRecognition } from '../hooks/useSpeechRecognition';
 import { useTextToSpeech } from '../hooks/useTextToSpeech';
 import { useVibration } from '../hooks/useVibration';
@@ -15,16 +15,17 @@ export const VoiceInterface: React.FC<VoiceInterfaceProps> = ({
   isProcessing, 
   response 
 }) => {
-  const { 
-    isListening, 
-    isSupported, 
-    transcript, 
-    commands,
-    isProcessingCommand,
-    startListening, 
-    stopListening,
-    resetProcessingState
-  } = useSpeechRecognition();
+  const {
+  isListening = false,
+  isSupported = false,
+  transcript = '',
+  commands = [],
+  isProcessingCommand = false,
+  startListening,
+  stopListening,
+  resetProcessingState
+} = useSpeechRecognition();
+
   
   const { speak, stop, isSpeaking } = useTextToSpeech();
   const { vibrateSuccess, vibrateError } = useVibration();
@@ -33,17 +34,18 @@ export const VoiceInterface: React.FC<VoiceInterfaceProps> = ({
 
   // Handle new voice commands
   useEffect(() => {
-    if (commands.length > 0) {
-      const latestCommand = commands[commands.length - 1];
-      if (latestCommand.confidence > 0.7) {
-        vibrateSuccess();
-        onCommand(latestCommand.text);
-      } else {
-        vibrateError();
-        resetProcessingState();
-      }
+  if (commands.length > 0) {
+    const latestCommand = commands[commands.length - 1];
+    if (latestCommand.confidence > 0.7) {
+      vibrateSuccess?.();
+      onCommand?.(latestCommand.text.trim());
+    } else {
+      vibrateError?.();
     }
-  }, [commands, onCommand, vibrateSuccess, vibrateError, resetProcessingState]);
+    resetProcessingState?.();
+  }
+}, [commands, onCommand, resetProcessingState, vibrateError, vibrateSuccess]);
+
 
   // Reset processing state when main processing starts
   useEffect(() => {
@@ -54,9 +56,10 @@ export const VoiceInterface: React.FC<VoiceInterfaceProps> = ({
 
   // Handle AI responses
   useEffect(() => {
-    if (response && audioEnabled && !isSpeaking) {
-      speak(response);
-    }
+    if (response && audioEnabled && !isSpeaking && speak) {
+  speak(response);
+}
+
   }, [response, audioEnabled, speak, isSpeaking]);
 
   const handleToggleListening = () => {
@@ -76,27 +79,40 @@ export const VoiceInterface: React.FC<VoiceInterfaceProps> = ({
 
   if (!isSupported) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
-        <p className="text-red-700">Speech recognition is not supported in this browser.</p>
+      <div className="bg-gradient-to-r from-red-50 to-pink-50 border border-red-200 rounded-2xl p-8 text-center">
+        <div className="bg-red-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+          <MicOff size={32} className="text-red-500" />
+        </div>
+        <h3 className="text-lg font-semibold text-red-800 mb-2">Voice Recognition Unavailable</h3>
+        <p className="text-red-700">Speech recognition is not supported in this browser. Please use Chrome, Edge, or Safari.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 space-y-4">
+    <div className="bg-white rounded-3xl shadow-xl p-8 space-y-6 border border-gray-100">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold text-gray-800">Voice Assistant</h2>
-        <button
-          onClick={handleToggleAudio}
-          className={`p-2 rounded-full transition-all ${
-            audioEnabled 
-              ? 'bg-blue-100 text-blue-600 hover:bg-blue-200' 
-              : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
-          }`}
-          title={audioEnabled ? 'Disable audio' : 'Enable audio'}
-        >
-          {audioEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
-        </button>
+        <div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-1">Voice Assistant</h2>
+          <p className="text-gray-600">Speak naturally to search for products</p>
+        </div>
+        <div className="flex items-center space-x-3">
+          <button
+            onClick={handleToggleAudio}
+            className={`p-3 rounded-xl transition-all duration-300 ${
+              audioEnabled 
+                ? 'bg-blue-100 text-blue-600 hover:bg-blue-200 shadow-lg' 
+                : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
+            }`}
+            title={audioEnabled ? 'Disable audio' : 'Enable audio'}
+          >
+            {audioEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
+          </button>
+          <div className="flex items-center space-x-2 bg-gradient-to-r from-blue-50 to-purple-50 px-4 py-2 rounded-full">
+            <Sparkles size={16} className="text-blue-500" />
+            <span className="text-sm font-medium text-blue-700">AI Powered</span>
+          </div>
+        </div>
       </div>
 
       <div className="relative">
@@ -114,15 +130,15 @@ export const VoiceInterface: React.FC<VoiceInterfaceProps> = ({
           }`}
         >
           {isListening ? <MicOff size={24} /> : <Mic size={24} />}
-          <span className="text-lg">
+          <span className="text-lg flex items-center gap-2">
+            {isProcessing && <span className="w-4 h-4 border-2 border-t-2 border-blue-500 rounded-full animate-spin"></span>}
             {isProcessing
               ? 'Processing...'
               : isProcessingCommand
               ? 'Command received...'
               : isListening
               ? 'Listening... Tap to stop'
-              : 'Tap to speak'
-            }
+              : 'Tap to speak'}
           </span>
         </button>
 

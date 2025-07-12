@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, DollarSign, Star, Package, Leaf, Heart } from 'lucide-react';
+import { MapPin, Package, Leaf } from 'lucide-react';
 import { Product } from '../types';
 
 interface ProductResultsProps {
@@ -15,32 +15,47 @@ export const ProductResults: React.FC<ProductResultsProps> = ({
 }) => {
   if (products.length === 0) {
     return (
-      <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-        <Package size={48} className="mx-auto mb-4 text-gray-400" />
-        <h3 className="text-lg font-medium text-gray-900 mb-2">No Products Found</h3>
-        <p className="text-gray-500">Try using voice commands to search for products</p>
+      <div className="bg-white rounded-3xl shadow-xl p-12 text-center border border-gray-100">
+        <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-2xl w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+          <Package size={48} className="text-gray-400" />
+        </div>
+        <h3 className="text-2xl font-bold text-gray-800 mb-3">No Products Found</h3>
+        <p className="text-gray-600 text-lg mb-6">Try using voice commands or search for different terms</p>
+        <div className="flex flex-wrap justify-center gap-3">
+          <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
+            "organic apples"
+          </span>
+          <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
+            "gluten-free bread"
+          </span>
+          <span className="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-medium">
+            "dairy-free milk"
+          </span>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-800">Product Results</h2>
-        <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
-          {products.length} found
-        </span>
+    <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-2xl font-bold text-gray-800">Product Results</h2>
+        <div className="flex items-center space-x-4">
+          <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+            {products.length} products found
+          </span>
+        </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {products.map((product) => (
           <div
             key={product.id}
             onClick={() => onProductSelect(product)}
-            className={`border rounded-xl p-4 cursor-pointer transition-all hover:shadow-md ${
+            className={`group border-2 rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:shadow-2xl transform hover:scale-105 ${
               highlightedProduct?.id === product.id
-                ? 'border-green-400 bg-green-50 shadow-lg ring-2 ring-green-200'
-                : 'border-gray-200 hover:border-gray-300'
+                ? 'border-green-400 bg-gradient-to-br from-green-50 to-emerald-50 shadow-2xl ring-4 ring-green-200'
+                : 'border-gray-200 hover:border-purple-300 bg-white hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50'
             }`}
           >
             <div className="flex items-start space-x-4">

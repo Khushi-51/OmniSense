@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
 import { ShoppingCart } from 'lucide-react';
 import { VoiceInterface } from './components/VoiceInterface';
-import { CameraView } from './components/CameraView';
+import { SparseShoppingAssistant } from './components/SparseShoppingAssistant';
 import { ProductResults } from './components/ProductResults';
 import { AccessibilityControls } from './components/AccessibilityControls';
 import { AIService } from './services/aiService';
 import { useVibration } from './hooks/useVibration';
 import { Product, SearchFilters } from './types';
-import { products as productDatabase } from './data/products';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
   const [highlightedProduct, setHighlightedProduct] = useState<Product | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [response, setResponse] = useState<string>('');
+  const [showVoice, setShowVoice] = useState(false);
   const [currentFilters, setCurrentFilters] = useState<SearchFilters>({});
   
   // Accessibility settings
@@ -132,51 +132,46 @@ function App() {
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Voice Interface */}
-          <div className="space-y-6">
-            <VoiceInterface
-              onCommand={handleVoiceCommand}
-              isProcessing={isProcessing}
-              response={response}
-            />
-            
-            {/* Quick Actions */}
-            <div className="bg-white rounded-2xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Commands</h3>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  onClick={() => handleVoiceCommand('find organic bread')}
-                  className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-3 rounded-lg font-medium hover:shadow-lg transition-all"
-                >
-                  Find Organic Bread
-                </button>
-                <button
-                  onClick={() => handleVoiceCommand('show me dairy free milk')}
-                  className="bg-gradient-to-r from-purple-400 to-pink-500 text-white px-4 py-3 rounded-lg font-medium hover:shadow-lg transition-all"
-                >
-                  Dairy-Free Milk
-                </button>
-                <button
-                  onClick={() => handleVoiceCommand('where are the bananas')}
-                  className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-3 rounded-lg font-medium hover:shadow-lg transition-all"
-                >
-                  Find Bananas
-                </button>
-                <button
-                  onClick={() => handleVoiceCommand('cheap protein options')}
-                  className="bg-gradient-to-r from-red-400 to-pink-500 text-white px-4 py-3 rounded-lg font-medium hover:shadow-lg transition-all"
-                >
-                  Cheap Protein
-                </button>
-              </div>
-            </div>
-          </div>
+          {/* Only Quick Actions Now (VoiceInterface will be global below) */}
+<div className="space-y-6">
+  {/* Quick Commands */}
+  <div className="bg-white rounded-2xl shadow-lg p-6">
+    <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Commands</h3>
+    <div className="grid grid-cols-2 gap-3">
+      <button
+        onClick={() => handleVoiceCommand('find organic bread')}
+        className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-3 rounded-lg font-medium hover:shadow-lg transition-all"
+      >
+        Find Organic Bread
+      </button>
+      <button
+        onClick={() => handleVoiceCommand('show me dairy free milk')}
+        className="bg-gradient-to-r from-purple-400 to-pink-500 text-white px-4 py-3 rounded-lg font-medium hover:shadow-lg transition-all"
+      >
+        Dairy-Free Milk
+      </button>
+      <button
+        onClick={() => handleVoiceCommand('where are the bananas')}
+        className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-3 rounded-lg font-medium hover:shadow-lg transition-all"
+      >
+        Find Bananas
+      </button>
+      <button
+        onClick={() => handleVoiceCommand('cheap protein options')}
+        className="bg-gradient-to-r from-red-400 to-pink-500 text-white px-4 py-3 rounded-lg font-medium hover:shadow-lg transition-all"
+      >
+        Cheap Protein
+      </button>
+    </div>
+  </div>
+</div>
 
-          {/* Camera View */}
+
+          {/* Shopping Assistant */}
           <div>
-            <CameraView
-              products={productDatabase}
+            <SparseShoppingAssistant
               onProductDetected={handleProductDetected}
-              onProductsFound={handleProductsFound}
+              onProductsFound={(products: Product[]) => handleProductsFound(products, 'detected')}
             />
           </div>
         </div>
@@ -224,6 +219,37 @@ function App() {
         reducedMotion={reducedMotion}
         onReducedMotionToggle={() => setReducedMotion(!reducedMotion)}
       />
+      {/* ✅ Global Voice Interface floating at bottom-right */}
+{/* ✅ Floating Mic Button */}
+<div className="fixed bottom-4 right-4 z-50">
+  <button
+    onClick={() => setShowVoice(true)}
+    className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-pink-500 text-white flex items-center justify-center shadow-lg hover:scale-105 transition-transform"
+    aria-label="Open Voice Assistant"
+  >
+    🎤
+  </button>
+</div>
+
+{/* ✅ Full Voice Assistant Popup */}
+{showVoice && (
+  <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="bg-white rounded-2xl shadow-xl p-6 max-w-xl w-full relative">
+      <button
+        className="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-2xl"
+        onClick={() => setShowVoice(false)}
+      >
+        ✖
+      </button>
+      <VoiceInterface
+        onCommand={handleVoiceCommand}
+        isProcessing={isProcessing}
+        response={response}
+      />
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
