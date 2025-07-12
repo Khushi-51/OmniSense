@@ -11,13 +11,27 @@ export interface EmotionData {
   genderProbability?: number
 }
 
+export interface AnalysisResult {
+  finalMood: string
+  confidence: number
+  emotionBreakdown: { [key: string]: number }
+  analysisTime: number
+  samplesCollected: number
+  dominantEmotions: string[]
+  moodStability: number
+}
+
 export interface ProductSuggestion {
   name: string
   description: string
   price: number
+  originalPrice?: number
   category: string
   rating: number
   emoji: string
+  moodMatch: number
+  reviews: number
+  discount?: number
 }
 
 export interface MoodSuggestions {
