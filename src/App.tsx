@@ -105,7 +105,7 @@ function App() {
     setHighlightedProduct(product);
     vibrateFound();
     
-    const productResponse = `Selected ${product.name} by ${product.brand}. Price: $${product.price}. Location: Aisle ${product.location.aisle}, ${product.location.shelf} shelf. ${product.inStock ? 'In stock!' : 'Out of stock.'}`;
+    const productResponse = `Selected ${product.name} by ${product.brand}. Price: ₹${product.price}. Location: Aisle ${product.location.aisle}, ${product.location.shelf} shelf. ${product.inStock ? 'In stock!' : 'Out of stock.'}`;
     setResponse(productResponse);
   };
 
@@ -195,7 +195,7 @@ function App() {
               )}
               {currentFilters.priceRange && (
                 <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
-                  Price: ${currentFilters.priceRange[0]} - ${currentFilters.priceRange[1]}
+                  Price: ₹{currentFilters.priceRange[0]} - ₹{currentFilters.priceRange[1]}
                 </span>
               )}
               {currentFilters.dietary && currentFilters.dietary.map((diet) => (

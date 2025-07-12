@@ -51,12 +51,12 @@ export class AIService {
   private static extractFilters(command: string): SearchFilters {
     const filters: SearchFilters = {};
     
-    // Price filters
+    // Price filters (in Indian Rupees)
     if (command.includes('cheap') || command.includes('budget') || command.includes('under')) {
-      filters.priceRange = [0, 5];
+      filters.priceRange = [0, 100];
     }
     if (command.includes('expensive') || command.includes('premium') || command.includes('over')) {
-      filters.priceRange = [10, 100];
+      filters.priceRange = [200, 1000];
     }
     
     // Dietary filters
@@ -82,7 +82,7 @@ export class AIService {
   }
 
   private static searchProducts(command: string, filters: SearchFilters): Product[] {
-    let results = products.filter(product => {
+    const results = products.filter(product => {
       // Text matching
       const searchTerms = command.toLowerCase().split(' ');
       const productText = `${product.name} ${product.brand} ${product.description} ${product.category}`.toLowerCase();
@@ -140,16 +140,16 @@ export class AIService {
     
     switch (intent) {
       case 'locate':
-        return `I found ${product.name} by ${product.brand} in aisle ${product.location.aisle}, ${product.location.shelf} shelf, ${product.location.position}. It costs $${product.price}. ${product.inStock ? 'It\'s currently in stock.' : 'It appears to be out of stock.'}`;
+        return `I found ${product.name} by ${product.brand} in aisle ${product.location.aisle}, ${product.location.shelf} shelf, ${product.location.position}. It costs ₹${product.price}. ${product.inStock ? 'It\'s currently in stock.' : 'It appears to be out of stock.'}`;
       
       case 'price_check':
-        return `${product.name} by ${product.brand} costs $${product.price}. ${products.length > 1 ? `I found ${products.length} similar products with prices ranging from $${Math.min(...products.map(p => p.price))} to $${Math.max(...products.map(p => p.price))}.` : ''}`;
+        return `${product.name} by ${product.brand} costs ₹${product.price}. ${products.length > 1 ? `I found ${products.length} similar products with prices ranging from ₹${Math.min(...products.map(p => p.price))} to ₹${Math.max(...products.map(p => p.price))}.` : ''}`;
       
       case 'alternatives':
-        return `For ${product.name}, I recommend these alternatives: ${products.slice(1, 3).map(p => `${p.name} by ${p.brand} for $${p.price}`).join(', ')}. All are located in nearby aisles.`;
+        return `For ${product.name}, I recommend these alternatives: ${products.slice(1, 3).map(p => `${p.name} by ${p.brand} for ₹${p.price}`).join(', ')}. All are located in nearby aisles.`;
       
       default:
-        return `I found ${product.name} by ${product.brand} for $${product.price}. It's located in aisle ${product.location.aisle}, ${product.location.shelf} shelf. ${product.dietary.length > 0 ? `This product is ${product.dietary.join(', ')}.` : ''} ${product.inStock ? 'It\'s in stock!' : 'Currently out of stock.'}`;
+        return `I found ${product.name} by ${product.brand} for ₹${product.price}. It's located in aisle ${product.location.aisle}, ${product.location.shelf} shelf. ${product.dietary.length > 0 ? `This product is ${product.dietary.join(', ')}.` : ''} ${product.inStock ? 'It\'s in stock!' : 'Currently out of stock.'}`;
     }
   }
 }

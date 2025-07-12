@@ -76,7 +76,7 @@ export const ProductResults: React.FC<ProductResultsProps> = ({
                   
                   <div className="flex items-center space-x-2">
                     <span className="text-lg font-bold text-green-600">
-                      ${product.price}
+                      ₹{product.price}
                     </span>
                     {!product.inStock && (
                       <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs">
