@@ -45,22 +45,22 @@ export default function CartTracker({ cart, onUpdateCart }: CartTrackerProps) {
   }, 0)
 
   return (
-    <div className="bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-800">
+    <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
           <div className="p-3 bg-purple-900 rounded-xl">
             <ShoppingBag className="w-6 h-6 text-purple-300" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-white">Your Cart</h2>
-            <p className="text-sm text-gray-400">
+            <h2 className="text-xl font-semibold text-gray-900">Your Cart</h2>
+            <p className="text-sm text-gray-600">
               {totalItems} items • ₹{totalSavings.toFixed(2)} saved
             </p>
           </div>
         </div>
         {totalItems > 0 && (
           <div className="text-right">
-            <p className="text-2xl font-bold text-white">₹{totalPrice.toFixed(2)}</p>
+            <p className="text-2xl font-bold text-gray-900">₹{totalPrice.toFixed(2)}</p>
             <p className="text-sm text-green-400">You saved ₹{totalSavings.toFixed(2)}</p>
           </div>
         )}
@@ -68,10 +68,10 @@ export default function CartTracker({ cart, onUpdateCart }: CartTrackerProps) {
 
       {cart.length === 0 ? (
         <div className="text-center py-16">
-          <div className="w-20 h-20 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6">
-            <ShoppingBag className="w-10 h-10 text-gray-600" />
+          <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <ShoppingBag className="w-10 h-10 text-gray-400" />
           </div>
-          <p className="text-gray-400 text-xl mb-2">Your cart is empty</p>
+          <p className="text-gray-600 text-xl mb-2">Your cart is empty</p>
           <p className="text-gray-500 text-sm">Add some items to get personalized recommendations!</p>
         </div>
       ) : (
@@ -79,13 +79,14 @@ export default function CartTracker({ cart, onUpdateCart }: CartTrackerProps) {
           {cart.map((item) => (
             <div
               key={item.id}
-              className="group flex items-center space-x-3 p-3 border border-gray-700 rounded-lg hover:shadow-md transition-all duration-200 hover:border-purple-500 bg-gray-800/50"
+              className="group flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:shadow-md transition-all duration-200 hover:border-purple-500 bg-gray-50"
             >
               <div className="relative flex-shrink-0">
                 <img
                   src={
                     item.image ||
-                    "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=60&h=60&fit=crop&auto=format"
+                    "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=60&h=60&fit=crop&auto=format" ||
+                    "/placeholder.svg"
                   }
                   alt={item.name}
                   className="w-16 h-16 object-cover rounded-lg"
@@ -100,8 +101,8 @@ export default function CartTracker({ cart, onUpdateCart }: CartTrackerProps) {
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-white truncate text-lg">{item.name}</h3>
-                    <p className="text-sm text-gray-400 mb-2">{item.category}</p>
+                    <h3 className="font-semibold text-gray-900 truncate text-lg">{item.name}</h3>
+                    <p className="text-sm text-gray-600 mb-2">{item.category}</p>
                     {item.description && <p className="text-xs text-gray-500 mb-3 line-clamp-2">{item.description}</p>}
 
                     <div className="flex items-center space-x-3 mb-3">
@@ -109,7 +110,7 @@ export default function CartTracker({ cart, onUpdateCart }: CartTrackerProps) {
                         {item.tags.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
-                            className="px-2 py-1 bg-gray-700 text-gray-300 text-xs rounded-full border border-gray-600"
+                            className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full border border-gray-200"
                           >
                             {tag}
                           </span>
@@ -119,7 +120,7 @@ export default function CartTracker({ cart, onUpdateCart }: CartTrackerProps) {
                       {item.rating && (
                         <div className="flex items-center space-x-1">
                           <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                          <span className="text-xs text-gray-400">{item.rating}</span>
+                          <span className="text-xs text-gray-600">{item.rating}</span>
                         </div>
                       )}
                     </div>
@@ -130,28 +131,28 @@ export default function CartTracker({ cart, onUpdateCart }: CartTrackerProps) {
                     className="p-2 rounded-full hover:bg-gray-700 transition-colors ml-4 flex-shrink-0"
                   >
                     <Heart
-                      className={`w-4 h-4 ${favorites.has(item.id) ? "text-red-500 fill-current" : "text-gray-400"}`}
+                      className={`w-4 h-4 ${favorites.has(item.id) ? "text-red-500 fill-current" : "text-gray-500"}`}
                     />
                   </button>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-1 bg-gray-700 rounded-md p-1">
+                    <div className="flex items-center space-x-1 bg-gray-100 rounded-md p-1">
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="p-2 rounded-md hover:bg-gray-600 hover:shadow-sm transition-all"
+                        className="p-2 rounded-md hover:bg-gray-200 hover:shadow-sm transition-all"
                         disabled={!item.inStock}
                       >
-                        <Minus className="w-4 h-4 text-gray-300" />
+                        <Minus className="w-4 h-4 text-gray-700" />
                       </button>
-                      <span className="w-8 text-center font-medium text-white">{item.quantity}</span>
+                      <span className="w-8 text-center font-medium text-gray-900">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="p-2 rounded-md hover:bg-gray-600 hover:shadow-sm transition-all"
+                        className="p-2 rounded-md hover:bg-gray-200 hover:shadow-sm transition-all"
                         disabled={!item.inStock}
                       >
-                        <Plus className="w-4 h-4 text-gray-300" />
+                        <Plus className="w-4 h-4 text-gray-700" />
                       </button>
                     </div>
 
@@ -172,17 +173,17 @@ export default function CartTracker({ cart, onUpdateCart }: CartTrackerProps) {
             </div>
           ))}
 
-          <div className="border-t border-gray-700 pt-6 mt-6">
-            <div className="bg-gray-800 rounded-lg p-4 space-y-3">
+          <div className="border-t border-gray-200 pt-6 mt-6">
+            <div className="bg-gray-50 rounded-lg p-4 space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-300">Subtotal:</span>
-                <span className="font-semibold text-white">₹{totalPrice.toFixed(2)}</span>
+                <span className="text-gray-600">Subtotal:</span>
+                <span className="font-semibold text-gray-900">₹{totalPrice.toFixed(2)}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-300">Tax (18%):</span>
-                <span className="font-semibold text-white">₹{(totalPrice * 0.18).toFixed(2)}</span>
+                <span className="text-gray-600">Tax (18%):</span>
+                <span className="font-semibold text-gray-900">₹{(totalPrice * 0.18).toFixed(2)}</span>
               </div>
-              <div className="flex justify-between items-center text-xl font-bold text-white pt-3 border-t border-gray-700">
+              <div className="flex justify-between items-center text-xl font-bold text-gray-900 pt-3 border-t border-gray-200">
                 <span>Total:</span>
                 <span>₹{(totalPrice * 1.18).toFixed(2)}</span>
               </div>

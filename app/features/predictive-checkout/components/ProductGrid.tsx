@@ -45,30 +45,30 @@ export default function ProductGrid({ products, onAddToCart, loading = false }: 
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {[...Array(6)].map((_, index) => (
-            <div key={index} className="bg-gray-900 rounded-xl p-6 animate-pulse border border-gray-800">
-              <div className="aspect-square bg-gray-800 rounded-lg mb-4"></div>
+            <div key={index} className="bg-gray-100 rounded-xl p-6 animate-pulse border border-gray-200">
+              <div className="aspect-square bg-gray-200 rounded-lg mb-4"></div>
               <div className="space-y-3">
-                <div className="h-4 bg-gray-800 rounded w-3/4"></div>
-                <div className="h-3 bg-gray-800 rounded w-1/2"></div>
-                <div className="h-6 bg-gray-800 rounded w-1/3"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                <div className="h-6 bg-gray-200 rounded w-1/3"></div>
               </div>
             </div>
           ))}
         </div>
       ) : products.length === 0 ? (
         <div className="text-center py-20">
-          <div className="w-24 h-24 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6">
-            <ShoppingCart className="w-12 h-12 text-gray-600" />
+          <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <ShoppingCart className="w-12 h-12 text-gray-400" />
           </div>
-          <h3 className="text-2xl font-semibold text-white mb-3">No products found</h3>
-          <p className="text-gray-400 text-lg">Try adjusting your search or filters</p>
+          <h3 className="text-2xl font-semibold text-gray-900 mb-3">No products found</h3>
+          <p className="text-gray-600 text-lg">Try adjusting your search or filters</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {products.map((product) => (
             <div
               key={product.id}
-              className="group bg-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-800 hover:border-purple-500 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10 overflow-hidden"
+              className="group bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 hover:border-purple-500 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10 overflow-hidden"
             >
               {/* Product Image - Perfect Aspect Ratio */}
               <div className="relative aspect-[4/3] overflow-hidden">
@@ -102,10 +102,10 @@ export default function ProductGrid({ products, onAddToCart, loading = false }: 
                 {/* Favorite Button - Perfect Position */}
                 <button
                   onClick={() => toggleFavorite(product.id)}
-                  className="absolute top-3 right-3 p-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-70 transition-all backdrop-blur-sm"
+                  className="absolute top-3 right-3 p-2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-70 transition-all backdrop-blur-sm"
                 >
                   <Heart
-                    className={`w-5 h-5 ${favorites.has(product.id) ? "text-red-500 fill-current" : "text-white"}`}
+                    className={`w-5 h-5 ${favorites.has(product.id) ? "text-red-500 fill-current" : "text-gray-600"}`}
                   />
                 </button>
 
@@ -122,26 +122,26 @@ export default function ProductGrid({ products, onAddToCart, loading = false }: 
               {/* Product Info - Perfect Spacing */}
               <div className="p-4">
                 <div className="mb-4">
-                  <h3 className="font-semibold text-white text-base line-clamp-2 group-hover:text-purple-300 transition-colors mb-1">
+                  <h3 className="font-semibold text-gray-900 text-base line-clamp-2 group-hover:text-purple-600 transition-colors mb-1">
                     {product.name}
                   </h3>
-                  <p className="text-sm text-gray-400 font-medium">{product.brand}</p>
+                  <p className="text-sm text-gray-600 font-medium">{product.brand}</p>
                 </div>
 
-                <p className="text-sm text-gray-300 line-clamp-2 mb-4 leading-relaxed">{product.description}</p>
+                <p className="text-sm text-gray-700 line-clamp-2 mb-4 leading-relaxed">{product.description}</p>
 
                 {/* Tags - Perfect Alignment */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {product.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 bg-gray-800 text-gray-300 text-xs rounded-full border border-gray-700 hover:border-purple-500 transition-colors"
+                      className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full border border-gray-200 hover:border-purple-500 transition-colors"
                     >
                       {tag.replace("-", " ")}
                     </span>
                   ))}
                   {product.tags.length > 3 && (
-                    <span className="px-3 py-1 bg-gray-800 text-gray-400 text-xs rounded-full border border-gray-700">
+                    <span className="px-3 py-1 bg-gray-100 text-gray-500 text-xs rounded-full border border-gray-200">
                       +{product.tags.length - 3}
                     </span>
                   )}
@@ -160,7 +160,7 @@ export default function ProductGrid({ products, onAddToCart, loading = false }: 
                         />
                       ))}
                     </div>
-                    <span className="text-sm text-gray-400 font-medium">
+                    <span className="text-sm text-gray-600 font-medium">
                       {product.rating} ({product.reviewCount})
                     </span>
                   </div>
@@ -172,7 +172,7 @@ export default function ProductGrid({ products, onAddToCart, loading = false }: 
                     {product.originalPrice && (
                       <span className="text-sm text-gray-500 line-through">₹{product.originalPrice}</span>
                     )}
-                    <span className="text-xl font-bold text-white">₹{product.price}</span>
+                    <span className="text-xl font-bold text-gray-900">₹{product.price}</span>
                   </div>
 
                   {product.discount && (

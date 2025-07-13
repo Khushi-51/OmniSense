@@ -121,7 +121,7 @@ export default function SearchBar({
             onKeyDown={handleKeyDown}
             onFocus={() => query.length >= 2 && setShowSuggestions(true)}
             placeholder={placeholder}
-            className="w-full pl-12 pr-24 py-4 bg-gray-900 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 shadow-lg"
+            className="w-full pl-12 pr-24 py-4 bg-white border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 shadow-lg"
           />
 
           <div className="absolute right-3 flex items-center space-x-2">
@@ -129,7 +129,7 @@ export default function SearchBar({
               <button
                 type="button"
                 onClick={clearSearch}
-                className="p-2 text-gray-400 hover:text-white transition-colors rounded-lg hover:bg-gray-800"
+                className="p-2 text-gray-500 hover:text-gray-700 transition-colors rounded-lg hover:bg-gray-100"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -138,7 +138,7 @@ export default function SearchBar({
             <button
               type="button"
               onClick={onFilterToggle}
-              className="p-2 text-purple-400 hover:text-purple-300 transition-colors rounded-lg hover:bg-gray-800"
+              className="p-2 text-purple-600 hover:text-purple-700 transition-colors rounded-lg hover:bg-gray-100"
             >
               <Filter className="w-4 h-4" />
             </button>
@@ -150,10 +150,10 @@ export default function SearchBar({
       {showSuggestions && suggestions.length > 0 && (
         <div
           ref={suggestionsRef}
-          className="absolute top-full left-0 right-0 mt-2 bg-gray-900 border border-gray-700 rounded-xl shadow-2xl z-50 overflow-hidden"
+          className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-2xl z-50 overflow-hidden"
         >
-          <div className="p-4 border-b border-gray-700">
-            <div className="flex items-center space-x-2 text-sm text-gray-400">
+          <div className="p-4 border-b border-gray-200">
+            <div className="flex items-center space-x-2 text-sm text-gray-500">
               <Sparkles className="w-4 h-4" />
               <span>Suggestions</span>
             </div>
@@ -164,8 +164,8 @@ export default function SearchBar({
               <button
                 key={suggestion}
                 onClick={() => handleSuggestionClick(suggestion)}
-                className={`w-full text-left px-4 py-3 hover:bg-gray-800 transition-colors ${
-                  index === selectedIndex ? "bg-gray-800 text-purple-300" : "text-gray-300"
+                className={`w-full text-left px-4 py-3 hover:bg-gray-100 transition-colors ${
+                  index === selectedIndex ? "bg-gray-100 text-purple-600" : "text-gray-700"
                 }`}
               >
                 <div className="flex items-center space-x-3">

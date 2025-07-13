@@ -34,9 +34,9 @@ export default function BudgetSetter({ onBudgetSet, currentBudget }: BudgetSette
       {/* Budget Setting Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center space-x-2 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors border border-gray-700"
+        className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-lg transition-colors border border-gray-200"
       >
-        <Target className="w-4 h-4" />
+        <Target className="w-4 h-4 text-purple-600" />
         <span className="text-sm">Set Budget: ₹{currentBudget}</span>
       </button>
 
@@ -44,13 +44,13 @@ export default function BudgetSetter({ onBudgetSet, currentBudget }: BudgetSette
       {isOpen && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
           <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm" onClick={handleCancel} />
-          <div className="bg-gray-900 rounded-xl p-6 border border-gray-800 shadow-2xl relative z-[10000] w-full max-w-md">
+          <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-2xl relative z-[10000] w-full max-w-md">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center space-x-3">
                 <div className="p-2 bg-purple-900 rounded-lg">
                   <Target className="w-5 h-5 text-purple-300" />
                 </div>
-                <h3 className="text-xl font-semibold text-white">Set Your Budget</h3>
+                <h3 className="text-xl font-semibold text-gray-900">Set Your Budget</h3>
               </div>
               <button onClick={handleCancel} className="p-2 text-gray-400 hover:text-white transition-colors">
                 <X className="w-5 h-5" />
@@ -59,18 +59,18 @@ export default function BudgetSetter({ onBudgetSet, currentBudget }: BudgetSette
 
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-3">Enter your shopping budget (₹)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-3">Enter your shopping budget (₹)</label>
                 <input
                   type="number"
                   value={budgetInput}
                   onChange={(e) => setBudgetInput(e.target.value)}
                   placeholder="Enter amount"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
               </div>
 
               <div>
-                <p className="text-sm font-medium text-gray-300 mb-3">Quick presets:</p>
+                <p className="text-sm font-medium text-gray-700 mb-3">Quick presets:</p>
                 <div className="grid grid-cols-3 gap-2">
                   {presetBudgets.map((preset) => (
                     <button
@@ -79,7 +79,7 @@ export default function BudgetSetter({ onBudgetSet, currentBudget }: BudgetSette
                       className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                         budgetInput === preset.toString()
                           ? "bg-purple-600 text-white"
-                          : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                       }`}
                     >
                       ₹{preset}
@@ -91,7 +91,7 @@ export default function BudgetSetter({ onBudgetSet, currentBudget }: BudgetSette
               <div className="flex space-x-3 pt-4">
                 <button
                   onClick={handleCancel}
-                  className="flex-1 px-4 py-3 bg-gray-800 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors"
+                  className="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
                 >
                   Cancel
                 </button>

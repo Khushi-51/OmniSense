@@ -154,7 +154,7 @@ export default function SystemCheck() {
   const allPassed = tests.every((t) => t.test.success)
 
   return (
-    <div className="bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-800 mb-8">
+    <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 mb-8">
       <div className="flex items-center justify-between cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
         <div className="flex items-center space-x-3">
           {allPassed ? (
@@ -162,9 +162,9 @@ export default function SystemCheck() {
           ) : (
             <XCircle className="w-6 h-6 text-red-400" />
           )}
-          <h2 className="text-xl font-semibold text-white">System Check</h2>
+          <h2 className="text-xl font-semibold text-gray-900">System Check</h2>
         </div>
-        {isOpen ? <ChevronUp className="w-5 h-5 text-gray-400" /> : <ChevronDown className="w-5 h-5 text-gray-400" />}
+        {isOpen ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}
       </div>
 
       {isOpen && (
@@ -174,21 +174,21 @@ export default function SystemCheck() {
               key={index}
               className={`p-4 rounded-lg border ${
                 test.test.success
-                  ? "bg-green-900/20 border-green-700 text-green-300"
-                  : "bg-red-900/20 border-red-700 text-red-300"
+                  ? "bg-green-50 border-green-200 text-green-800"
+                  : "bg-red-50 border-red-200 text-red-800"
               }`}
             >
               <div className="flex items-center space-x-2 mb-2">
                 {test.test.success ? (
-                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <CheckCircle className="w-5 h-5 text-green-600" />
                 ) : (
-                  <XCircle className="w-5 h-5 text-red-400" />
+                  <XCircle className="w-5 h-5 text-red-600" />
                 )}
-                <h3 className="font-medium">{test.name}</h3>
+                <h3 className="font-medium text-gray-900">{test.name}</h3>
               </div>
-              <p className="text-sm">{test.test.message}</p>
+              <p className="text-sm text-gray-700">{test.test.message}</p>
               {test.test.success && test.test.details && (
-                <div className="mt-2 text-xs bg-gray-800 p-3 rounded-lg overflow-auto max-h-32">
+                <div className="mt-2 text-xs bg-gray-100 p-3 rounded-lg overflow-auto max-h-32 text-gray-800">
                   <pre>{JSON.stringify(test.test.details, null, 2)}</pre>
                 </div>
               )}

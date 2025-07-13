@@ -23,6 +23,7 @@ import SearchBar from "./components/SearchBar"
 import ProductGrid from "./components/ProductGrid"
 import SearchFiltersComponent from "./components/SearchFilters"
 import { X, CheckCircle, AlertTriangle, Info, XCircle, Sparkles, ShoppingBag, Target, TrendingUp } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 import BudgetSetter from "./components/BudgetSetter"
 
 // Enhanced mock cart data with realistic product images
@@ -235,26 +236,26 @@ export default function PredictiveCheckoutPage() {
   const getNotificationIcon = (type: Notification["type"]) => {
     switch (type) {
       case "success":
-        return <CheckCircle className="w-4 h-4 text-green-400" />
+        return <CheckCircle className="w-4 h-4 text-green-600" />
       case "warning":
-        return <AlertTriangle className="w-4 h-4 text-yellow-400" />
+        return <AlertTriangle className="w-4 h-4 text-yellow-600" />
       case "error":
-        return <XCircle className="w-4 h-4 text-red-400" />
+        return <XCircle className="w-4 h-4 text-red-600" />
       case "info":
-        return <Info className="w-4 h-4 text-blue-400" />
+        return <Info className="w-4 h-4 text-blue-600" />
     }
   }
 
   const getNotificationStyle = (type: Notification["type"]) => {
     switch (type) {
       case "success":
-        return "bg-green-900/90 border-green-700 text-green-100"
+        return "bg-green-50 border-green-200 text-green-800"
       case "warning":
-        return "bg-yellow-900/90 border-yellow-700 text-yellow-100"
+        return "bg-yellow-50 border-yellow-200 text-yellow-800"
       case "error":
-        return "bg-red-900/90 border-red-700 text-red-100"
+        return "bg-red-50 border-red-200 text-red-800"
       case "info":
-        return "bg-blue-900/90 border-blue-700 text-blue-100"
+        return "bg-blue-50 border-blue-200 text-blue-800"
     }
   }
 
@@ -266,7 +267,7 @@ export default function PredictiveCheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-purple-900">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Compact Notifications */}
       <div className="fixed top-4 right-4 z-50 space-y-2 max-w-xs">
         {checkoutState.notifications.map((notification) => (
@@ -278,7 +279,7 @@ export default function PredictiveCheckoutPage() {
             <p className="text-xs font-medium flex-1">{notification.message}</p>
             <button
               onClick={() => dismissNotification(notification.id)}
-              className="p-0.5 hover:bg-white hover:bg-opacity-10 rounded"
+              className="p-0.5 hover:bg-gray-200 hover:bg-opacity-50 rounded"
             >
               <X className="w-3 h-3" />
             </button>
@@ -288,45 +289,50 @@ export default function PredictiveCheckoutPage() {
 
       <div className="py-4 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Compact Header */}
+          {/* Header */}
           <div className="text-center mb-6">
-            <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Predictive Checkout Concierge</h1>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            <Badge variant="secondary" className="mb-4">
+              AI-Powered Shopping Assistant
+            </Badge>
+            <h1 className="text-3xl lg:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              🛒 Predictive Checkout Concierge
+            </h1>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               AI-powered shopping with smart recommendations and budget tracking
             </p>
           </div>
 
           {/* Compact Stats & Search Row */}
-          <div className="bg-gray-900/80 backdrop-blur-sm rounded-2xl border border-gray-800 p-6 mb-6">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-200 p-6 mb-6 shadow-sm">
             {/* Stats Row */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-purple-900 rounded-xl mx-auto mb-2">
-                  <ShoppingBag className="w-6 h-6 text-purple-300" />
+                <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl mx-auto mb-2">
+                  <ShoppingBag className="w-6 h-6 text-blue-600" />
                 </div>
-                <p className="text-2xl font-bold text-white">{totalItems}</p>
-                <p className="text-sm text-gray-400">Cart Items</p>
+                <p className="text-2xl font-bold text-gray-900">{totalItems}</p>
+                <p className="text-sm text-gray-600">Cart Items</p>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-green-900 rounded-xl mx-auto mb-2">
-                  <Target className="w-6 h-6 text-green-300" />
+                <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-xl mx-auto mb-2">
+                  <Target className="w-6 h-6 text-green-600" />
                 </div>
-                <p className="text-2xl font-bold text-white">{checkoutState.budget.percentage.toFixed(0)}%</p>
-                <p className="text-sm text-gray-400">Budget Used</p>
+                <p className="text-2xl font-bold text-gray-900">{checkoutState.budget.percentage.toFixed(0)}%</p>
+                <p className="text-sm text-gray-600">Budget Used</p>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-blue-900 rounded-xl mx-auto mb-2">
-                  <Sparkles className="w-6 h-6 text-blue-300" />
+                <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-xl mx-auto mb-2">
+                  <Sparkles className="w-6 h-6 text-purple-600" />
                 </div>
-                <p className="text-2xl font-bold text-white">{checkoutState.recommendations.length}</p>
-                <p className="text-sm text-gray-400">AI Suggestions</p>
+                <p className="text-2xl font-bold text-gray-900">{checkoutState.recommendations.length}</p>
+                <p className="text-sm text-gray-600">AI Suggestions</p>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-orange-900 rounded-xl mx-auto mb-2">
-                  <TrendingUp className="w-6 h-6 text-orange-300" />
+                <div className="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-xl mx-auto mb-2">
+                  <TrendingUp className="w-6 h-6 text-orange-600" />
                 </div>
-                <p className="text-2xl font-bold text-white">₹{checkoutState.budget.savings.toFixed(0)}</p>
-                <p className="text-sm text-gray-400">Saved</p>
+                <p className="text-2xl font-bold text-gray-900">₹{checkoutState.budget.savings.toFixed(0)}</p>
+                <p className="text-sm text-gray-600">Saved</p>
               </div>
             </div>
 
@@ -346,13 +352,13 @@ export default function PredictiveCheckoutPage() {
             {/* Left Column - Main Content */}
             <div className="lg:col-span-2 space-y-6">
               {/* Tab Navigation */}
-              <div className="flex space-x-1 bg-gray-900/50 backdrop-blur-sm rounded-xl p-1 border border-gray-800">
+              <div className="flex space-x-1 bg-gray-100 backdrop-blur-sm rounded-xl p-1 border border-gray-200">
                 <button
                   onClick={() => setActiveTab("products")}
                   className={`flex-1 px-4 py-3 rounded-lg font-medium transition-all ${
                     activeTab === "products"
-                      ? "bg-purple-600 text-white shadow-lg"
-                      : "text-gray-400 hover:text-white hover:bg-gray-800"
+                      ? "bg-blue-600 text-white shadow-lg"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-200"
                   }`}
                 >
                   Products ({searchResults.totalCount})
@@ -361,8 +367,8 @@ export default function PredictiveCheckoutPage() {
                   onClick={() => setActiveTab("cart")}
                   className={`flex-1 px-4 py-3 rounded-lg font-medium transition-all relative ${
                     activeTab === "cart"
-                      ? "bg-purple-600 text-white shadow-lg"
-                      : "text-gray-400 hover:text-white hover:bg-gray-800"
+                      ? "bg-blue-600 text-white shadow-lg"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-200"
                   }`}
                 >
                   Cart ({totalItems})
@@ -372,8 +378,8 @@ export default function PredictiveCheckoutPage() {
                   onClick={() => setActiveTab("recommendations")}
                   className={`flex-1 px-4 py-3 rounded-lg font-medium transition-all relative ${
                     activeTab === "recommendations"
-                      ? "bg-purple-600 text-white shadow-lg"
-                      : "text-gray-400 hover:text-white hover:bg-gray-800"
+                      ? "bg-blue-600 text-white shadow-lg"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-200"
                   }`}
                 >
                   AI Picks ({checkoutState.recommendations.length})

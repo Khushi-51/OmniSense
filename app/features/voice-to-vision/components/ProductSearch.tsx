@@ -106,24 +106,7 @@ export function ProductSearch({ onProductsFound, onProductSelect }: ProductSearc
         </div>
       </div>
 
-      {/* Features */}
-      <div className="grid grid-cols-1 gap-3">
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 border border-blue-200">
-          <div className="flex items-center gap-2 mb-2">
-            <Mic className="w-4 h-4 text-blue-500" />
-            <span className="text-sm font-medium text-blue-800">Voice Search</span>
-          </div>
-          <p className="text-xs text-blue-700">Use natural language: "organic apples" or "gluten-free bread"</p>
-        </div>
 
-        <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
-          <div className="flex items-center gap-2 mb-2">
-            <Star className="w-4 h-4 text-green-500" />
-            <span className="text-sm font-medium text-green-800">Smart Recommendations</span>
-          </div>
-          <p className="text-xs text-green-700">Get personalized suggestions based on dietary preferences</p>
-        </div>
-      </div>
     </div>
   )
 }
