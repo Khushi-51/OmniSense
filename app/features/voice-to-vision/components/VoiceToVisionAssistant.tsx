@@ -1,22 +1,11 @@
 "use client";
-
 import type React from "react";
-
 import { useState, useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  ShoppingCart,
-  Search,
-  Package,
-  Mic,
-  Star,
-  MapPin,
-  Leaf,
-  Volume2,
-} from "lucide-react";
+import { ShoppingCart, Search, Package, Mic, Star, MapPin, Leaf, Volume2, Loader2 } from 'lucide-react';
 import { VoiceRecognition } from "./VoiceRecognition";
 import { AccessibilityControls } from "./AccessibilityControls";
 import type { Product } from "../types/voice.types";
@@ -51,15 +40,12 @@ export function VoiceToVisionAssistant() {
 
   const handleSpeech = (text: string) => {
     if (!audioEnabled || !text || text === lastSpokenRef.current) return;
-
     // Clear any existing timeout
     if (speechTimeoutRef.current) {
       clearTimeout(speechTimeoutRef.current);
     }
-
     // Stop current speech
     stop();
-
     // Set a small delay to prevent rapid-fire speech
     speechTimeoutRef.current = setTimeout(() => {
       lastSpokenRef.current = text;
@@ -68,60 +54,50 @@ export function VoiceToVisionAssistant() {
   };
 
   const handleVoiceCommand = async (command: string) => {
-  setIsProcessing(true)
-  setSearchStatus("Processing...")
-
-  try {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-
-    const results = productDatabase.filter(
-      (product) =>
-        product.name.toLowerCase().includes(command.toLowerCase()) ||
-        product.category.toLowerCase().includes(command.toLowerCase()) ||
-        product.description.toLowerCase().includes(command.toLowerCase()) ||
-        product.dietary.some((diet) => diet.toLowerCase().includes(command.toLowerCase())),
-    )
-
-    if (results.length > 0) {
-      const topProduct = results[0]
-      setProducts(results.slice(0, 10))
-      setHighlightedProduct(topProduct)
-      setVoiceFound(results.length)
-
-      const responseText = `Found ${results.length} products matching "${command}". The top result is ${topProduct.name} by ${topProduct.brand}, priced at ₹${topProduct.price}. It is located in aisle ${topProduct.location.aisle}, ${topProduct.location.shelf} shelf.`
-      
-      setResponse(responseText)
-      handleSpeech(responseText)
-    } else {
-      const responseText = `No products found matching "${command}". Try searching for categories like organic, gluten-free, or dairy.`
-      setResponse(responseText)
-      handleSpeech(responseText)
-      setProducts([])
-      setVoiceFound(0)
+    setIsProcessing(true)
+    setSearchStatus("Processing...")
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const results = productDatabase.filter(
+        (product) =>
+          product.name.toLowerCase().includes(command.toLowerCase()) ||
+          product.category.toLowerCase().includes(command.toLowerCase()) ||
+          product.description.toLowerCase().includes(command.toLowerCase()) ||
+          product.dietary.some((diet) => diet.toLowerCase().includes(command.toLowerCase())),
+      )
+      if (results.length > 0) {
+        const topProduct = results[0]
+        setProducts(results.slice(0, 10))
+        setHighlightedProduct(topProduct)
+        setVoiceFound(results.length)
+        const responseText = `Found ${results.length} products matching "${command}". The top result is ${topProduct.name} by ${topProduct.brand}, priced at ₹${topProduct.price}. It is located in aisle ${topProduct.location.aisle}, ${topProduct.location.shelf} shelf.`
+        setResponse(responseText)
+        handleSpeech(responseText)
+      } else {
+        const responseText = `No products found matching "${command}". Try searching for categories like organic, gluten-free, or dairy.`
+        setResponse(responseText)
+        handleSpeech(responseText)
+        setProducts([])
+        setVoiceFound(0)
+      }
+      setSearchStatus("Ready")
+    } catch (error) {
+      console.error("Voice command error:", error)
+      const errorText = "Sorry, I encountered an error processing your request."
+      setResponse(errorText)
+      handleSpeech(errorText)
+      setSearchStatus("Ready")
+    } finally {
+      setIsProcessing(false)
     }
-
-    setSearchStatus("Ready")
-  } catch (error) {
-    console.error("Voice command error:", error)
-    const errorText = "Sorry, I encountered an error processing your request."
-    setResponse(errorText)
-    handleSpeech(errorText)
-    setSearchStatus("Ready")
-  } finally {
-    setIsProcessing(false)
   }
-}
-
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
-
     setIsProcessing(true);
     setSearchStatus("Processing...");
-
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
-
       const results = productDatabase.filter(
         (product) =>
           product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -133,7 +109,6 @@ export function VoiceToVisionAssistant() {
             diet.toLowerCase().includes(searchQuery.toLowerCase())
           )
       );
-
       setProducts(results.slice(0, 10));
       setVoiceFound(results.length);
       setSearchStatus("Ready");
@@ -159,70 +134,68 @@ export function VoiceToVisionAssistant() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#f3f0ff" }}>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-950 text-gray-100">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="bg-blue-500 p-3 rounded-full">
+            <div className="bg-cyan-600 p-3 rounded-full">
               <ShoppingCart className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-800">
+            <h1 className="text-3xl font-bold text-white">
               Voice-to-Vision
             </h1>
           </div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-300 max-w-2xl mx-auto">
             Your AI-powered shopping assistant with voice commands, visual
             recognition, and accessibility features
           </p>
         </div>
-
         {/* Quick Commands */}
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-700 mb-3">
+          <h3 className="text-sm font-medium text-gray-300 mb-3">
             Quick Commands
           </h3>
           <div className="grid grid-cols-2 gap-3">
             <Button
               onClick={() => handleVoiceCommand("find organic bread")}
-              className="bg-green-500 hover:bg-green-600 text-white font-medium py-3 rounded-lg"
+              className="bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-lg"
             >
               Find Organic Bread
             </Button>
             <Button
               onClick={() => handleVoiceCommand("dairy free milk")}
-              className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 rounded-lg"
+              className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 rounded-lg"
             >
               Dairy-Free Milk
             </Button>
             <Button
               onClick={() => handleVoiceCommand("find bananas")}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg"
+              className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 rounded-lg"
             >
               Find Bananas
             </Button>
             <Button
               onClick={() => handleVoiceCommand("cheap protein")}
-              className="bg-pink-500 hover:bg-pink-600 text-white font-medium py-3 rounded-lg"
+              className="bg-pink-600 hover:bg-pink-700 text-white font-medium py-3 rounded-lg"
             >
               Cheap Protein
             </Button>
           </div>
         </div>
-
         {/* Smart Shopping Assistant */}
-        <Card className="mb-6 bg-white shadow-lg rounded-2xl">
+        <Card className="mb-6 bg-gray-800/80 backdrop-blur-sm shadow-lg rounded-2xl border border-gray-700">
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="bg-purple-500 p-2 rounded-lg">
+                <div className="bg-purple-600 p-2 rounded-lg">
                   <ShoppingCart className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl text-purple-600">
+                  <CardTitle className="text-xl text-purple-400">
                     Smart Shopping Assistant
                   </CardTitle>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-300">
                     AI-powered product discovery with voice commands
                   </p>
                 </div>
@@ -231,8 +204,8 @@ export function VoiceToVisionAssistant() {
                 onClick={() => setIsVoiceActive(!isVoiceActive)}
                 className={`${
                   isVoiceActive
-                    ? "bg-green-500 hover:bg-green-600"
-                    : "bg-gray-500 hover:bg-gray-600"
+                    ? "bg-green-600 hover:bg-green-700"
+                    : "bg-gray-700 hover:bg-gray-600"
                 } text-white px-4 py-2 rounded-lg flex items-center gap-2`}
               >
                 <Mic className="w-4 h-4" />
@@ -242,60 +215,59 @@ export function VoiceToVisionAssistant() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-3 gap-4">
-              <div className="bg-blue-50 rounded-lg p-4 text-center border border-blue-200">
-                <div className="bg-blue-500 p-2 rounded-lg w-fit mx-auto mb-2">
+              <div className="bg-blue-900/50 rounded-lg p-4 text-center border border-blue-700">
+                <div className="bg-blue-600 p-2 rounded-lg w-fit mx-auto mb-2">
                   <Package className="w-5 h-5 text-white" />
                 </div>
-                <div className="text-2xl font-bold text-blue-600">
+                <div className="text-2xl font-bold text-blue-200">
                   {voiceFound}
                 </div>
-                <div className="text-xs text-blue-600 font-medium">
+                <div className="text-xs text-blue-200 font-medium">
                   Voice Found
                 </div>
-                <div className="text-xs text-blue-500 mt-1">
+                <div className="text-xs text-blue-300 mt-1">
                   Ready to explore
                 </div>
               </div>
-              <div className="bg-orange-50 rounded-lg p-4 text-center border border-orange-200">
-                <div className="bg-orange-500 p-2 rounded-lg w-fit mx-auto mb-2">
+              <div className="bg-orange-900/50 rounded-lg p-4 text-center border border-orange-700">
+                <div className="bg-orange-600 p-2 rounded-lg w-fit mx-auto mb-2">
                   <Search className="w-5 h-5 text-white" />
                 </div>
-                <div className="text-2xl font-bold text-orange-600">
+                <div className="text-2xl font-bold text-orange-200">
                   {searchStatus}
                 </div>
-                <div className="text-xs text-orange-600 font-medium">
+                <div className="text-xs text-orange-200 font-medium">
                   Search Status
                 </div>
-                <div className="text-xs text-orange-500 mt-1">
+                <div className="text-xs text-orange-300 mt-1">
                   {isProcessing ? "Please wait..." : "Type or speak to search"}
                 </div>
               </div>
-              <div className="bg-purple-50 rounded-lg p-4 text-center border border-purple-200">
-                <div className="bg-purple-500 p-2 rounded-lg w-fit mx-auto mb-2">
+              <div className="bg-purple-900/50 rounded-lg p-4 text-center border border-purple-700">
+                <div className="bg-purple-600 p-2 rounded-lg w-fit mx-auto mb-2">
                   <Package className="w-5 h-5 text-white" />
                 </div>
-                <div className="text-2xl font-bold text-purple-600">1000</div>
-                <div className="text-xs text-purple-600 font-medium">
+                <div className="text-2xl font-bold text-purple-200">1000</div>
+                <div className="text-xs text-purple-200 font-medium">
                   Database
                 </div>
-                <div className="text-xs text-purple-500 mt-1">
+                <div className="text-xs text-purple-300 mt-1">
                   Items available
                 </div>
               </div>
             </div>
           </CardContent>
         </Card>
-
         {/* Voice Assistant */}
-        <Card className="mb-6 bg-white shadow-lg rounded-2xl">
+        <Card className="mb-6 bg-gray-800/80 backdrop-blur-sm shadow-lg rounded-2xl border border-gray-700">
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-xl">Voice Assistant</CardTitle>
-              <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+              <CardTitle className="text-xl text-white">Voice Assistant</CardTitle>
+              <Badge variant="secondary" className="bg-blue-900/50 text-blue-200 border-blue-700">
                 AI Powered
               </Badge>
             </div>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-300">
               Speak naturally to search for products
             </p>
           </CardHeader>
@@ -303,20 +275,19 @@ export function VoiceToVisionAssistant() {
             <Button
               onClick={() => setShowVoice(true)}
               disabled={isProcessing}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium py-4 rounded-lg flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-cyan-600 to-purple-700 hover:from-cyan-700 hover:to-purple-800 text-white font-medium py-4 rounded-lg flex items-center justify-center gap-2"
             >
               <Mic className="w-5 h-5" />
               {isProcessing ? "Processing..." : "Tap to speak"}
             </Button>
           </CardContent>
         </Card>
-
         {/* Product Search */}
-        <Card className="mb-6 bg-white shadow-lg rounded-2xl">
+        <Card className="mb-6 bg-gray-800/80 backdrop-blur-sm shadow-lg rounded-2xl border border-gray-700">
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-xl">Product Search</CardTitle>
-              <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+              <CardTitle className="text-xl text-white">Product Search</CardTitle>
+              <Badge variant="secondary" className="bg-blue-900/50 text-blue-200 border-blue-700">
                 AI Powered
               </Badge>
             </div>
@@ -329,76 +300,74 @@ export function VoiceToVisionAssistant() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Search for products, brands, or categories..."
-                className="flex-1 rounded-lg"
+                className="flex-1 rounded-lg bg-gray-700 text-gray-100 border-gray-600 placeholder:text-gray-400"
               />
               <Button
                 onClick={handleSearch}
                 disabled={isProcessing}
-                className="bg-blue-500 hover:bg-blue-600 rounded-lg"
+                className="bg-cyan-600 hover:bg-cyan-700 rounded-lg text-white"
               >
                 Search
               </Button>
             </div>
-
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+              <div className="bg-blue-900/50 rounded-lg p-4 border border-blue-700">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="bg-blue-500 p-1 rounded">
+                  <div className="bg-blue-600 p-1 rounded">
                     <Mic className="w-4 h-4 text-white" />
                   </div>
-                  <span className="font-medium text-blue-800">
+                  <span className="font-medium text-blue-200">
                     Voice Search
                   </span>
                 </div>
-                <p className="text-sm text-blue-700 mb-3">
+                <p className="text-sm text-blue-300 mb-3">
                   Use natural language to find products. Try "organic apples" or
                   "gluten-free bread"
                 </p>
                 <div className="flex flex-wrap gap-1">
                   <Badge
                     variant="secondary"
-                    className="bg-blue-200 text-blue-800 text-xs"
+                    className="bg-blue-800 text-blue-200 text-xs border-blue-700"
                   >
                     "find organic bread"
                   </Badge>
                   <Badge
                     variant="secondary"
-                    className="bg-blue-200 text-blue-800 text-xs"
+                    className="bg-blue-800 text-blue-200 text-xs border-blue-700"
                   >
                     "dairy-free milk"
                   </Badge>
                 </div>
               </div>
-
-              <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+              <div className="bg-green-900/50 rounded-lg p-4 border border-green-700">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="bg-green-500 p-1 rounded">
+                  <div className="bg-green-600 p-1 rounded">
                     <Star className="w-4 h-4 text-white" />
                   </div>
-                  <span className="font-medium text-green-800">
+                  <span className="font-medium text-green-200">
                     Smart Recommendations
                   </span>
                 </div>
-                <p className="text-sm text-green-700 mb-3">
+                <p className="text-sm text-green-300 mb-3">
                   Get personalized product suggestions based on your preferences
                   and dietary needs
                 </p>
                 <div className="flex flex-wrap gap-1">
                   <Badge
                     variant="secondary"
-                    className="bg-green-200 text-green-800 text-xs"
+                    className="bg-green-800 text-green-200 text-xs border-green-700"
                   >
                     Organic
                   </Badge>
                   <Badge
                     variant="secondary"
-                    className="bg-green-200 text-green-800 text-xs"
+                    className="bg-green-800 text-green-200 text-xs border-green-700"
                   >
                     Gluten-Free
                   </Badge>
                   <Badge
                     variant="secondary"
-                    className="bg-green-200 text-green-800 text-xs"
+                    className="bg-green-800 text-green-200 text-xs border-green-700"
                   >
                     Vegan
                   </Badge>
@@ -407,37 +376,35 @@ export function VoiceToVisionAssistant() {
             </div>
           </CardContent>
         </Card>
-
         {/* Response Display */}
         {response && (
-          <Card className="mb-6 bg-green-50 border-green-200 shadow-lg rounded-2xl">
+          <Card className="mb-6 bg-green-900/50 border-green-700 shadow-lg rounded-2xl">
             <CardContent className="p-4">
               <div className="flex items-start gap-3">
-                <div className="bg-green-500 p-2 rounded-full">
+                <div className="bg-green-600 p-2 rounded-full">
                   <Volume2 className="w-4 h-4 text-white" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="secondary">Assistant Response</Badge>
+                    <Badge variant="secondary" className="bg-gray-700 text-gray-300 border-gray-600">Assistant Response</Badge>
                     {isSpeaking && (
-                      <Badge variant="outline" className="animate-pulse">
+                      <Badge variant="outline" className="animate-pulse bg-gray-700 text-gray-300 border-gray-600">
                         Speaking...
                       </Badge>
                     )}
                   </div>
-                  <p className="text-green-800">{response}</p>
+                  <p className="text-green-200">{response}</p>
                 </div>
               </div>
             </CardContent>
           </Card>
         )}
-
         {/* Product Results */}
         {products.length > 0 ? (
-          <Card className="mb-6 bg-white shadow-lg rounded-2xl">
+          <Card className="mb-6 bg-gray-800/80 backdrop-blur-sm shadow-lg rounded-2xl border border-gray-700">
             <CardHeader>
-              <CardTitle className="text-xl">🛍️ Product Results</CardTitle>
-              <p className="text-sm text-gray-600">
+              <CardTitle className="text-xl text-white">🛍️ Product Results</CardTitle>
+              <p className="text-sm text-gray-300">
                 Found {products.length} products
               </p>
             </CardHeader>
@@ -449,8 +416,8 @@ export function VoiceToVisionAssistant() {
                     onClick={() => handleProductSelect(product)}
                     className={`border rounded-lg p-4 cursor-pointer transition-all hover:shadow-md ${
                       highlightedProduct?.id === product.id
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-gray-200 hover:border-gray-300"
+                        ? "border-cyan-500 bg-cyan-900/50"
+                        : "border-gray-700 hover:border-gray-600 bg-gray-700"
                     }`}
                   >
                     <div className="flex items-start gap-3">
@@ -462,16 +429,16 @@ export function VoiceToVisionAssistant() {
                         className="w-16 h-16 object-cover rounded"
                       />
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-sm truncate">
+                        <h3 className="font-semibold text-sm truncate text-gray-100">
                           {product.name}
                         </h3>
-                        <p className="text-xs text-gray-500">{product.brand}</p>
-                        <p className="text-sm font-bold text-green-600">
+                        <p className="text-xs text-gray-400">{product.brand}</p>
+                        <p className="text-sm font-bold text-green-400">
                           ₹{product.price}
                         </p>
                         <div className="flex items-center gap-1 mt-1">
                           <MapPin className="w-3 h-3 text-gray-400" />
-                          <span className="text-xs text-gray-500">
+                          <span className="text-xs text-gray-400">
                             Aisle {product.location.aisle}
                           </span>
                         </div>
@@ -481,7 +448,7 @@ export function VoiceToVisionAssistant() {
                               <Badge
                                 key={diet}
                                 variant="secondary"
-                                className="text-xs"
+                                className="text-xs bg-gray-600 text-gray-200 border-gray-500"
                               >
                                 <Leaf className="w-2 h-2 mr-1" />
                                 {diet}
@@ -497,56 +464,57 @@ export function VoiceToVisionAssistant() {
             </CardContent>
           </Card>
         ) : (
-          <Card className="mb-6 bg-white shadow-lg rounded-2xl">
+          <Card className="mb-6 bg-gray-800/80 backdrop-blur-sm shadow-lg rounded-2xl border border-gray-700">
             <CardContent className="text-center py-12">
-              <div className="bg-gray-100 p-6 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+              <div className="bg-gray-700 p-6 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center">
                 <Package className="w-10 h-10 text-gray-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              <h3 className="text-xl font-semibold text-white mb-2">
                 No Products Found
               </h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-300 mb-4">
                 Try using voice commands or search for different terms
               </p>
               <div className="flex flex-wrap justify-center gap-2">
-                <Badge
+                <Button
                   variant="outline"
-                  className="cursor-pointer hover:bg-gray-100"
+                  className="cursor-pointer hover:bg-gray-700 bg-gray-800 text-gray-300 border-gray-700"
                   onClick={() => handleVoiceCommand("organic apples")}
                 >
                   "organic apples"
-                </Badge>
-                <Badge
+                </Button>
+                <Button
                   variant="outline"
-                  className="cursor-pointer hover:bg-gray-100"
+                  className="cursor-pointer hover:bg-gray-700 bg-gray-800 text-gray-300 border-gray-700"
                   onClick={() => handleVoiceCommand("gluten-free bread")}
                 >
                   "gluten-free bread"
-                </Badge>
-                <Badge
+                </Button>
+                <Button
                   variant="outline"
-                  className="cursor-pointer hover:bg-gray-100"
+                  className="cursor-pointer hover:bg-gray-700 bg-gray-800 text-gray-300 border-gray-700"
                   onClick={() => handleVoiceCommand("dairy-free milk")}
                 >
                   "dairy-free milk"
-                </Badge>
+                </Button>
               </div>
             </CardContent>
           </Card>
         )}
-
         {/* Voice Modal */}
         {showVoice && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+          <div className="fixed inset-0 bg-gray-900/90 flex items-center justify-center z-50">
+            <div className="bg-gray-800 rounded-lg shadow-xl p-6 max-w-md w-full mx-4 border border-gray-700">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold">Voice Assistant</h3>
-                <button
+                <h3 className="text-lg font-semibold text-white">Voice Assistant</h3>
+                <Button
+                  variant="ghost"
+                  size="icon"
                   onClick={() => setShowVoice(false)}
-                  className="text-gray-500 hover:text-gray-700"
+                  className="text-gray-300 hover:bg-gray-700"
                 >
                   ✕
-                </button>
+                </Button>
               </div>
               <VoiceRecognition
                 onCommand={handleVoiceCommand}
@@ -556,7 +524,6 @@ export function VoiceToVisionAssistant() {
             </div>
           </div>
         )}
-
         {/* Accessibility Controls */}
         <AccessibilityControls
           audioEnabled={audioEnabled}
