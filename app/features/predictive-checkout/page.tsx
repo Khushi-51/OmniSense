@@ -390,7 +390,7 @@ export default function PredictiveCheckoutPage() {
               </div>
 
               {/* Tab Content */}
-              <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800 min-h-[600px]">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 min-h-[600px] shadow-sm">
                 {activeTab === "products" && (
                   <div className="p-6">
                     <ProductGrid products={searchResults.products} onAddToCart={handleAddProductToCart} />

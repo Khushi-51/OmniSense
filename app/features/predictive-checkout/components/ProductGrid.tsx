@@ -68,7 +68,7 @@ export default function ProductGrid({ products, onAddToCart, loading = false }: 
           {products.map((product) => (
             <div
               key={product.id}
-              className="group bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 hover:border-purple-500 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10 overflow-hidden"
+              className="group bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 hover:border-purple-500 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10 overflow-hidden flex flex-col h-full"
             >
               {/* Product Image - Perfect Aspect Ratio */}
               <div className="relative aspect-[4/3] overflow-hidden">
@@ -120,7 +120,7 @@ export default function ProductGrid({ products, onAddToCart, loading = false }: 
               </div>
 
               {/* Product Info - Perfect Spacing */}
-              <div className="p-4">
+              <div className="p-4 flex flex-col flex-1">
                 <div className="mb-4">
                   <h3 className="font-semibold text-gray-900 text-base line-clamp-2 group-hover:text-purple-600 transition-colors mb-1">
                     {product.name}
@@ -183,26 +183,28 @@ export default function ProductGrid({ products, onAddToCart, loading = false }: 
                   )}
                 </div>
 
-                {/* Add to Cart Button - Perfect Width */}
-                <button
-                  onClick={() => handleAddToCart(product)}
-                  disabled={!product.inStock || addingItems.has(product.id)}
-                  className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 disabled:from-gray-700 disabled:to-gray-800 text-white py-3 px-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center space-x-2 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
-                >
-                  {addingItems.has(product.id) ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      <span>Adding...</span>
-                    </>
-                  ) : !product.inStock ? (
-                    <span>Out of Stock</span>
-                  ) : (
-                    <>
-                      <ShoppingCart className="w-5 h-5" />
-                      <span>Add to Cart</span>
-                    </>
-                  )}
-                </button>
+                {/* Add to Cart Button - Perfect Width - Push to bottom */}
+                <div className="mt-auto">
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    disabled={!product.inStock || addingItems.has(product.id)}
+                    className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 disabled:from-gray-700 disabled:to-gray-800 text-white py-3 px-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center space-x-2 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+                  >
+                    {addingItems.has(product.id) ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>Adding...</span>
+                      </>
+                    ) : !product.inStock ? (
+                      <span>Out of Stock</span>
+                    ) : (
+                      <>
+                        <ShoppingCart className="w-5 h-5" />
+                        <span>Add to Cart</span>
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           ))}
