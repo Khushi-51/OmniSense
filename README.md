@@ -1,0 +1,89 @@
+OmniSense – Shopping, Reimagined
+Overview
+OmniSense is an AI-powered, emotion-aware shopping assistant developed for the Walmart Sparkathon 2025, designed to help customers make better, kinder, and smarter purchasing decisions based on their mood, needs, and budget. By addressing the emotional and practical challenges faced by shoppers, OmniSense creates a personalized, uplifting retail experience.
+🔗 Live Demo: https://omni-sense.vercel.app/🚀 One-Line Pitch: AI-powered assistant for accessible independence. Voice, emotion, AR – all in sync, for everyone..
+Problem Statement
+In today’s fast-paced retail environments, shoppers often feel anxious, tired, or overwhelmed, leading to rushed decisions, confusion over product labels, or disengagement. OmniSense targets:  
+
+Elderly and visually impaired individuals  
+Busy parents, students, or neurodiverse users  
+Anyone feeling emotionally drained or confused by health buzzwords
+
+OmniSense bridges the emotional gap, creating a retail experience that listens, understands, and uplifts.
+Features
+
+AR Mood Detection:Detects customer mood in real-time using front camera via face-api.js or MediaPipe. Suggests tailored product bundles, e.g., “You look tired — here’s a Cozy Kit: Blanket + Tea + Eye Mask.”
+Voice-to-Vision Mode:Users can voice commands like “Show me keto snacks under ₹200,” and the AI responds with friendly, voiced suggestions and AR-style visual cues (mocked).
+Predictive Checkout Concierge:Tracks cart, dietary preferences, and mood in real-time. At checkout, offers suggestions like, “You stayed under budget! Want to add a scented candle for ₹89?”
+Smart Product Explainer:Simplifies complex product terms (e.g., “low-GI,” “fortified oats,” “cold-pressed”) with tap-to-explain, layman-friendly definitions.
+Comfort Bundles & Mood Uplift:Crafts mood-based bundles like “Relax Kit” or “Energize Pack” tailored to user’s budget and emotional state. Includes self-care tips (e.g., “Text a friend 💌”), mood playlists, or uplifting jokes/missions.
+
+Tech Stack
+
+Frontend: React.js (Next.js), Tailwind CSS  
+Backend: OpenAI GPT-3.5 via API routes, mock data via JSON  
+AI/UX: GPT-generated suggestions, face-api.js/MediaPipe for mood detection, Web Speech API for voice interactions, AR overlay (simulated)  
+Database: JSON-based mock data for product glossary  
+Deployment: Vercel for frontend hosting
+
+Installation
+
+Clone the Repository:  
+git clone https://github.com/Khushi-51/OmniSense.git
+cd OmniSense
+
+
+Install Dependencies:  
+npm install
+
+
+Set Up Environment Variables:Create a .env.local file in the root directory and add:  
+OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxx
+
+
+Run the Application:  
+npm run dev
+
+
+Access the App:Open your browser and navigate to http://localhost:3000 or visit the deployed version at https://omni-sense.vercel.app/.
+
+
+Usage
+
+Mood-Based Shopping: Allow the AI to detect your mood and suggest personalized product bundles.  
+Voice Commands: Use voice input to request specific products or categories within your budget.  
+Checkout Assistance: Receive real-time cart suggestions and budget-friendly add-ons at checkout.  
+Product Clarity: Tap on complex product terms for simple explanations.  
+Mood Uplift: Enjoy tailored self-care tips, playlists, or motivational messages post-purchase.
+
+Project Structure
+OmniSense/
+├── app/
+│   ├── features/
+│   │   └── Product-Explainer/
+│   │       ├── page.tsx         # Main UI
+│   │       └── components/      # UI components
+├── public/                      # Static assets
+├── README.md                    # Project documentation
+└── package.json                 # Project dependencies and scripts
+
+Contributing
+We welcome contributions to OmniSense! To contribute:  
+
+Fork the repository.  
+Create a new branch (git checkout -b feature/your-feature).  
+Commit your changes (git commit -m 'Add your feature').  
+Push to the branch (git push origin feature/your-feature).  
+Open a Pull Request.
+
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
+Acknowledgements
+
+Developed for Walmart Sparkathon 2025.  
+Thanks to the open-source community for tools and libraries like face-api.js, MediaPipe, and Web Speech API.  
+Special thanks to Vercel for seamless deployment support.
+
+Contact
+Feel free to connect at:📧 kritikasawhney1010@gmail.com🔗 LinkedIn🌐 GitHub Repository🎥 YouTube Demo Link (2-minute walkthrough)  
+💙 Built With Empathy By: Kritika Sawhney & Team
