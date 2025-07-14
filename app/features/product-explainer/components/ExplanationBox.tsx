@@ -25,16 +25,16 @@ export default function ExplanationBox({
   if (isLoading) {
     return (
       <div className="w-full max-w-2xl mx-auto mt-8">
-        <div className="bg-white rounded-lg shadow-lg p-6 border animate-pulse">
-          <div className="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
+        <div className="bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-gray-700 animate-pulse">
+          <div className="h-4 bg-gray-600 rounded w-1/4 mb-4"></div>
           <div className="space-y-2">
-            <div className="h-4 bg-gray-200 rounded"></div>
-            <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-            <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+            <div className="h-4 bg-gray-600 rounded"></div>
+            <div className="h-4 bg-gray-600 rounded w-5/6"></div>
+            <div className="h-4 bg-gray-600 rounded w-4/6"></div>
           </div>
           <div className="mt-4 flex gap-2">
-            <div className="h-10 bg-gray-200 rounded w-32"></div>
-            <div className="h-10 bg-gray-200 rounded w-32"></div>
+            <div className="h-10 bg-gray-600 rounded w-32"></div>
+            <div className="h-10 bg-gray-600 rounded w-32"></div>
           </div>
         </div>
       </div>
@@ -76,12 +76,12 @@ export default function ExplanationBox({
 
   return (
     <div className="w-full max-w-2xl mx-auto mt-8">
-      <div className="bg-white rounded-lg shadow-lg p-6 border">
+      <div className="bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-gray-700">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold text-gray-800 capitalize">{explanation.term}</h2>
+          <h2 className="text-2xl font-bold text-white capitalize">{explanation.term}</h2>
           <span
             className={`px-3 py-1 rounded-full text-xs font-medium ${
-              explanation.source === "local" ? "bg-green-100 text-green-800" : "bg-blue-100 text-blue-800"
+              explanation.source === "local" ? "bg-green-900/50 text-green-300 border border-green-700" : "bg-blue-900/50 text-blue-300 border border-blue-700"
             }`}
           >
             {explanation.source === "local" ? "📚 Local" : "🤖 AI"}
@@ -89,14 +89,14 @@ export default function ExplanationBox({
         </div>
 
         <div className="mb-6">
-          <p className="text-gray-700 leading-relaxed text-lg">{currentExplanation}</p>
+          <p className="text-gray-200 leading-relaxed text-lg">{currentExplanation}</p>
         </div>
 
         <div className="flex flex-wrap gap-3">
           <button
             onClick={() => setIsSimpleMode(!isSimpleMode)}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-              isSimpleMode ? "bg-purple-500 text-white" : "bg-purple-100 text-purple-700 hover:bg-purple-200"
+              isSimpleMode ? "bg-purple-600 text-white" : "bg-purple-900/50 text-purple-300 hover:bg-purple-800/50 border border-purple-700"
             }`}
             aria-label={isSimpleMode ? "Show detailed explanation" : "Show simple explanation"}
           >
@@ -108,7 +108,7 @@ export default function ExplanationBox({
             onClick={() => onReadAloud(currentExplanation)}
             disabled={isSpeaking}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-              isSpeaking ? "bg-green-500 text-white animate-pulse" : "bg-green-100 text-green-700 hover:bg-green-200"
+              isSpeaking ? "bg-green-600 text-white animate-pulse" : "bg-green-900/50 text-green-300 hover:bg-green-800/50 border border-green-700"
             }`}
             aria-label="Read explanation aloud"
           >
@@ -118,7 +118,7 @@ export default function ExplanationBox({
 
           <button
             onClick={handleCopy}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 font-medium transition-all duration-200"
+            className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-600 font-medium transition-all duration-200 border border-gray-600"
             aria-label="Copy explanation to clipboard"
           >
             <Copy size={18} />
@@ -127,7 +127,7 @@ export default function ExplanationBox({
 
           <button
             onClick={handleShare}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 font-medium transition-all duration-200"
+            className="flex items-center gap-2 px-4 py-2 bg-cyan-900/50 text-cyan-300 rounded-lg hover:bg-cyan-800/50 font-medium transition-all duration-200 border border-cyan-700"
             aria-label="Share explanation"
           >
             <Share2 size={18} />
@@ -136,7 +136,7 @@ export default function ExplanationBox({
 
           <button
             onClick={onReset}
-            className="flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-lg hover:bg-orange-200 font-medium transition-all duration-200"
+            className="flex items-center gap-2 px-4 py-2 bg-orange-900/50 text-orange-300 rounded-lg hover:bg-orange-800/50 font-medium transition-all duration-200 border border-orange-700"
             aria-label="Try another term"
           >
             <RotateCcw size={18} />

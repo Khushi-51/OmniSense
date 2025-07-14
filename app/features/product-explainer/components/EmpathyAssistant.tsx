@@ -243,14 +243,14 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-gray-900 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-700">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
               <Heart className="text-pink-500" size={24} />
               Your Caring Shopping Assistant
             </h2>
-            <button onClick={onClose} className="text-gray-500 hover:text-gray-700 text-xl font-bold">
+            <button onClick={onClose} className="text-gray-400 hover:text-gray-200 text-xl font-bold">
               ×
             </button>
           </div>
@@ -258,14 +258,14 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
           {!response ? (
             <div className="space-y-6">
               <div className="text-center">
-                <p className="text-gray-600 mb-4">
+                <p className="text-gray-300 mb-4">
                   I'm here to help you feel better through thoughtful shopping. Let's find what your heart needs today.
                 </p>
               </div>
 
               {/* Mood Selection */}
               <div>
-                <h3 className="text-lg font-semibold mb-3">How are you feeling today?</h3>
+                <h3 className="text-lg font-semibold mb-3 text-white">How are you feeling today?</h3>
                 <div className="grid grid-cols-2 gap-3">
                   {moods.map((mood) => (
                     <button
@@ -273,12 +273,12 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
                       onClick={() => setSelectedMood(mood.value)}
                       className={`p-3 rounded-lg border-2 transition-all duration-200 ${
                         selectedMood === mood.value
-                          ? "border-pink-500 bg-pink-50"
-                          : "border-gray-200 hover:border-pink-300"
+                          ? "border-pink-500 bg-pink-900/30"
+                          : "border-gray-600 hover:border-pink-400 bg-gray-800/50"
                       }`}
                     >
                       <div className="text-2xl mb-1">{mood.emoji}</div>
-                      <div className="font-medium">{mood.label}</div>
+                      <div className="font-medium text-gray-200">{mood.label}</div>
                     </button>
                   ))}
                 </div>
@@ -286,7 +286,7 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
 
               {/* Budget Selection */}
               <div>
-                <h3 className="text-lg font-semibold mb-3">What's your comfort budget today?</h3>
+                <h3 className="text-lg font-semibold mb-3 text-white">What's your comfort budget today?</h3>
                 <div className="grid grid-cols-3 gap-3">
                   {budgets.map((budget) => (
                     <button
@@ -294,11 +294,11 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
                       onClick={() => setSelectedBudget(budget)}
                       className={`p-3 rounded-lg border-2 transition-all duration-200 ${
                         selectedBudget === budget
-                          ? "border-green-500 bg-green-50"
-                          : "border-gray-200 hover:border-green-300"
+                          ? "border-green-500 bg-green-900/30"
+                          : "border-gray-600 hover:border-green-400 bg-gray-800/50"
                       }`}
                     >
-                      <div className="font-bold text-lg">₹{budget}</div>
+                      <div className="font-bold text-lg text-gray-200">₹{budget}</div>
                     </button>
                   ))}
                 </div>
@@ -308,7 +308,7 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
               <button
                 onClick={handleGetRecommendations}
                 disabled={!selectedMood || !selectedBudget || isLoading}
-                className="w-full py-3 bg-pink-500 text-white rounded-lg font-semibold hover:bg-pink-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
+                className="w-full py-3 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <>
@@ -326,53 +326,53 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
           ) : (
             <div className="space-y-6">
               {/* Comfort Message */}
-              <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
-                <p className="text-pink-800 leading-relaxed">{response.comfortMessage}</p>
+              <div className="bg-pink-900/30 border border-pink-700 rounded-lg p-4">
+                <p className="text-pink-200 leading-relaxed">{response.comfortMessage}</p>
               </div>
 
               {/* Bundle */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h3 className="text-lg font-bold text-blue-800 mb-3">{response.bundleName}</h3>
+              <div className="bg-blue-900/30 border border-blue-700 rounded-lg p-4">
+                <h3 className="text-lg font-bold text-blue-200 mb-3">{response.bundleName}</h3>
                 <div className="space-y-3">
                   {response.products.map((product, index) => (
                     <div key={index} className="flex justify-between items-center">
                       <div>
-                        <div className="font-medium">{product.name}</div>
-                        <div className="text-sm text-gray-600">{product.description}</div>
+                        <div className="font-medium text-gray-200">{product.name}</div>
+                        <div className="text-sm text-gray-400">{product.description}</div>
                       </div>
-                      <div className="font-bold text-blue-700">₹{product.price}</div>
+                      <div className="font-bold text-blue-300">₹{product.price}</div>
                     </div>
                   ))}
 
                   {response.treatYourselfItem && (
-                    <div className="border-t pt-3 mt-3">
-                      <div className="text-sm font-medium text-purple-600 mb-1">Treat Yourself Bonus:</div>
+                    <div className="border-t border-gray-600 pt-3 mt-3">
+                      <div className="text-sm font-medium text-purple-300 mb-1">Treat Yourself Bonus:</div>
                       <div className="flex justify-between items-center">
                         <div>
-                          <div className="font-medium">{response.treatYourselfItem.name}</div>
-                          <div className="text-sm text-gray-600">{response.treatYourselfItem.description}</div>
+                          <div className="font-medium text-gray-200">{response.treatYourselfItem.name}</div>
+                          <div className="text-sm text-gray-400">{response.treatYourselfItem.description}</div>
                         </div>
-                        <div className="font-bold text-purple-700">₹{response.treatYourselfItem.price}</div>
+                        <div className="font-bold text-purple-300">₹{response.treatYourselfItem.price}</div>
                       </div>
                     </div>
                   )}
                 </div>
 
-                <div className="border-t pt-3 mt-3 flex justify-between items-center">
-                  <div className="font-bold">Total: ₹{response.totalSpent}</div>
-                  <div className="text-sm text-green-600">Saved: ₹{response.remainingBudget}</div>
+                <div className="border-t border-gray-600 pt-3 mt-3 flex justify-between items-center">
+                  <div className="font-bold text-gray-200">Total: ₹{response.totalSpent}</div>
+                  <div className="text-sm text-green-400">Saved: ₹{response.remainingBudget}</div>
                 </div>
               </div>
 
               {/* Mood Uplift */}
-              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                <h4 className="font-semibold text-yellow-800 mb-2">A little something to lift your spirits:</h4>
-                <p className="text-yellow-700 mb-3">{response.moodUplift.content}</p>
+              <div className="bg-yellow-900/30 border border-yellow-700 rounded-lg p-4">
+                <h4 className="font-semibold text-yellow-200 mb-2">A little something to lift your spirits:</h4>
+                <p className="text-yellow-100 mb-3">{response.moodUplift.content}</p>
 
                 {response.moodUplift.type === "music" && response.moodUplift.link && (
                   <button
                     onClick={openMusicLink}
-                    className="flex items-center gap-2 px-3 py-2 bg-yellow-200 text-yellow-800 rounded-lg hover:bg-yellow-300 transition-all duration-200"
+                    className="flex items-center gap-2 px-3 py-2 bg-yellow-800/50 text-yellow-200 rounded-lg hover:bg-yellow-700/50 transition-all duration-200 border border-yellow-600"
                   >
                     <Music size={16} />
                     Listen Now
@@ -384,7 +384,7 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
               <div className="flex flex-wrap gap-3">
                 <button
                   onClick={sendVirtualHug}
-                  className="flex items-center gap-2 px-4 py-2 bg-pink-100 text-pink-700 rounded-lg hover:bg-pink-200 transition-all duration-200"
+                  className="flex items-center gap-2 px-4 py-2 bg-pink-900/50 text-pink-300 rounded-lg hover:bg-pink-800/50 transition-all duration-200 border border-pink-700"
                 >
                   <Heart size={16} />
                   Send Virtual Hug
@@ -392,7 +392,7 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
 
                 <button
                   onClick={handleMoodSwap}
-                  className="flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition-all duration-200"
+                  className="flex items-center gap-2 px-4 py-2 bg-purple-900/50 text-purple-300 rounded-lg hover:bg-purple-800/50 transition-all duration-200 border border-purple-700"
                 >
                   <Smile size={16} />
                   {response.alternateMood}
@@ -400,7 +400,7 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
 
                 <button
                   onClick={handleReset}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-200"
+                  className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-600 transition-all duration-200 border border-gray-600"
                 >
                   <RefreshCw size={16} />
                   Try Again
@@ -414,11 +414,11 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
       {/* Calm Transition Modal */}
       {showCalmTransition && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-[110] overflow-y-auto">
-          <div className="relative w-full max-w-3xl my-8 bg-gradient-to-br from-blue-100 via-teal-50 to-green-100 rounded-3xl shadow-2xl min-h-[500px]">
+          <div className="relative w-full max-w-3xl my-8 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 rounded-3xl shadow-2xl min-h-[500px] border border-gray-700">
             {/* Close button */}
             <button
               onClick={cancelMoodSwap}
-              className="absolute top-4 right-4 z-30 text-gray-600 hover:text-gray-800 text-3xl font-bold bg-white/80 rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-white transition-all duration-200"
+              className="absolute top-4 right-4 z-30 text-gray-400 hover:text-gray-200 text-3xl font-bold bg-gray-800/80 rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-gray-700 transition-all duration-200 border border-gray-600"
             >
               ×
             </button>
@@ -440,26 +440,26 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
             {/* Scrollable Content Container */}
             <div className="relative z-20 max-h-[80vh] overflow-y-auto p-6 md:p-8">
               <div className="flex flex-col items-center justify-center text-center min-h-[400px]">
-                <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 md:p-8 max-w-2xl mx-auto shadow-2xl border border-white/50 w-full">
+                <div className="bg-gray-800/95 backdrop-blur-sm rounded-3xl p-6 md:p-8 max-w-2xl mx-auto shadow-2xl border border-gray-600 w-full">
                   {/* Calm Animation */}
                   <div className="text-6xl md:text-8xl mb-6 animate-bounce">😌</div>
 
-                  <h2 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent mb-4">
+                  <h2 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent mb-4">
                     Ready to Find Your Calm?
                   </h2>
 
-                  <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed max-w-lg mx-auto">
+                  <p className="text-base md:text-lg text-gray-300 mb-6 leading-relaxed max-w-lg mx-auto">
                     Sometimes we need to step back and reset our energy. Let's take a moment to breathe, release what's
                     weighing on you, and start fresh with a calmer perspective. You deserve this peaceful moment.
                   </p>
 
                   {/* Calming Affirmations */}
-                  <div className="bg-gradient-to-r from-blue-50 to-teal-50 rounded-xl p-4 md:p-6 mb-6 border border-blue-200">
-                    <h3 className="font-bold text-blue-800 mb-3 text-lg md:text-xl flex items-center justify-center gap-2">
+                  <div className="bg-gradient-to-r from-blue-900/50 to-teal-900/50 rounded-xl p-4 md:p-6 mb-6 border border-blue-700">
+                    <h3 className="font-bold text-blue-300 mb-3 text-lg md:text-xl flex items-center justify-center gap-2">
                       <Wind size={20} />
                       Gentle Reminders
                     </h3>
-                    <div className="space-y-2 text-sm md:text-base text-blue-700">
+                    <div className="space-y-2 text-sm md:text-base text-blue-200">
                       <p>You are exactly where you need to be</p>
                       <p>This feeling will pass like waves on the shore</p>
                       <p>You have the strength to find peace within</p>
@@ -467,13 +467,13 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
                   </div>
 
                   {/* Mini Breathing Exercise */}
-                  <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-4 md:p-6 mb-6 border border-green-200">
-                    <h3 className="font-bold text-green-800 mb-3 text-lg flex items-center justify-center gap-2">
+                  <div className="bg-gradient-to-r from-green-900/50 to-blue-900/50 rounded-xl p-4 md:p-6 mb-6 border border-green-700">
+                    <h3 className="font-bold text-green-300 mb-3 text-lg flex items-center justify-center gap-2">
                       <Sparkles size={18} />
                       Take Three Deep Breaths
                     </h3>
                     <div className="text-center">
-                      <p className="text-green-700 text-sm md:text-base">
+                      <p className="text-green-200 text-sm md:text-base">
                         Inhale peace... Hold gently... Exhale tension...
                       </p>
                     </div>
@@ -483,38 +483,38 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
                   <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-6">
                     <button
                       onClick={confirmMoodSwap}
-                      className="px-6 md:px-8 py-3 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-xl hover:from-blue-600 hover:to-teal-600 transition-all duration-200 font-medium shadow-lg transform hover:scale-105 text-sm md:text-base flex items-center justify-center gap-2"
+                      className="px-6 md:px-8 py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-xl hover:from-blue-700 hover:to-teal-700 transition-all duration-200 font-medium shadow-lg transform hover:scale-105 text-sm md:text-base flex items-center justify-center gap-2"
                     >
                       <Wind size={18} />
                       Yes, Let's Start Fresh
                     </button>
                     <button
                       onClick={cancelMoodSwap}
-                      className="px-6 md:px-8 py-3 bg-gradient-to-r from-gray-400 to-gray-500 text-white rounded-xl hover:from-gray-500 hover:to-gray-600 transition-all duration-200 font-medium shadow-lg transform hover:scale-105 text-sm md:text-base"
+                      className="px-6 md:px-8 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-xl hover:from-gray-700 hover:to-gray-800 transition-all duration-200 font-medium shadow-lg transform hover:scale-105 text-sm md:text-base"
                     >
                       Maybe Later
                     </button>
                   </div>
 
                   {/* Additional Calm Options */}
-                  <div className="pt-4 md:pt-6 border-t border-gray-200">
-                    <p className="text-xs md:text-sm text-gray-600 mb-3">Quick calm boosters:</p>
+                  <div className="pt-4 md:pt-6 border-t border-gray-600">
+                    <p className="text-xs md:text-sm text-gray-400 mb-3">Quick calm boosters:</p>
                     <div className="flex flex-wrap gap-2 justify-center">
                       <button
                         onClick={() => window.open("https://www.youtube.com/watch?v=ZToicYcHIOU", "_blank")}
-                        className="px-3 md:px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-all duration-200 text-xs md:text-sm"
+                        className="px-3 md:px-4 py-2 bg-blue-900/50 text-blue-300 rounded-lg hover:bg-blue-800/50 transition-all duration-200 text-xs md:text-sm border border-blue-700"
                       >
                         Ocean Sounds
                       </button>
                       <button
                         onClick={() => alert("Take 5 minutes to step outside and feel the fresh air")}
-                        className="px-3 md:px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-all duration-200 text-xs md:text-sm"
+                        className="px-3 md:px-4 py-2 bg-green-900/50 text-green-300 rounded-lg hover:bg-green-800/50 transition-all duration-200 text-xs md:text-sm border border-green-700"
                       >
                         Fresh Air Break
                       </button>
                       <button
                         onClick={() => alert("Make yourself a warm cup of tea and savor each sip mindfully")}
-                        className="px-3 md:px-4 py-2 bg-amber-100 text-amber-700 rounded-lg hover:bg-amber-200 transition-all duration-200 text-xs md:text-sm"
+                        className="px-3 md:px-4 py-2 bg-amber-900/50 text-amber-300 rounded-lg hover:bg-amber-800/50 transition-all duration-200 text-xs md:text-sm border border-amber-700"
                       >
                         Mindful Tea
                       </button>
@@ -530,11 +530,11 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
       {/* Virtual Hug Modal */}
       {showHugModal && (
         <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 z-[100] overflow-y-auto">
-          <div className="relative w-full max-w-4xl my-8 bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 rounded-2xl shadow-2xl min-h-[600px]">
+          <div className="relative w-full max-w-4xl my-8 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 rounded-2xl shadow-2xl min-h-[600px] border border-gray-700">
             {/* Close button */}
             <button
               onClick={() => setShowHugModal(false)}
-              className="absolute top-4 right-4 z-30 text-gray-700 hover:text-gray-900 text-3xl font-bold bg-white/80 rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-white transition-all duration-200"
+              className="absolute top-4 right-4 z-30 text-gray-400 hover:text-gray-200 text-3xl font-bold bg-gray-800/80 rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-gray-700 transition-all duration-200 border border-gray-600"
             >
               ×
             </button>
@@ -542,50 +542,50 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
             {/* Scrollable Content Container */}
             <div className="relative z-20 max-h-[80vh] overflow-y-auto p-4 md:p-8">
               <div className="flex flex-col items-center justify-center text-center min-h-[500px]">
-                <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 md:p-8 max-w-2xl mx-auto shadow-2xl border border-white/50 w-full">
+                <div className="bg-gray-800/95 backdrop-blur-sm rounded-3xl p-6 md:p-8 max-w-2xl mx-auto shadow-2xl border border-gray-600 w-full">
                   {/* Main Hug Animation */}
                   <div className="text-6xl md:text-8xl mb-6 animate-pulse">🤗</div>
 
-                  <h2 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-4">
+                  <h2 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent mb-4">
                     Sending You a Big Virtual Hug!
                   </h2>
 
-                  <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed max-w-lg mx-auto">
+                  <p className="text-base md:text-lg text-gray-300 mb-6 leading-relaxed max-w-lg mx-auto">
                     You are not alone in this journey. Every challenge you face makes you stronger, and every step you
                     take is progress. Take a deep breath, feel this moment of peace, and remember that you are loved,
                     valued, and capable of amazing things.
                   </p>
 
-                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 mb-6 border border-blue-200">
-                    <p className="text-blue-800 font-medium italic text-sm md:text-base">
+                  <div className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 rounded-xl p-4 mb-6 border border-blue-700">
+                    <p className="text-blue-200 font-medium italic text-sm md:text-base">
                       "Sometimes the most productive thing you can do is relax." - Mark Black
                     </p>
                   </div>
 
                   {/* Breathing Exercise */}
-                  <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-4 md:p-6 mb-6 border border-green-200">
-                    <h3 className="font-bold text-green-800 mb-3 text-lg md:text-xl">Take a Moment to Breathe</h3>
+                  <div className="bg-gradient-to-r from-green-900/50 to-blue-900/50 rounded-xl p-4 md:p-6 mb-6 border border-green-700">
+                    <h3 className="font-bold text-green-300 mb-3 text-lg md:text-xl">Take a Moment to Breathe</h3>
                     {!breathingExercise ? (
                       <div>
-                        <p className="text-green-700 mb-4 text-sm md:text-base">
+                        <p className="text-green-200 mb-4 text-sm md:text-base">
                           Let's do a quick breathing exercise together to center yourself
                         </p>
                         <button
                           onClick={startBreathingExercise}
-                          className="px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-xl hover:from-green-600 hover:to-blue-600 transition-all duration-200 font-medium shadow-lg text-sm md:text-base"
+                          className="px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl hover:from-green-700 hover:to-blue-700 transition-all duration-200 font-medium shadow-lg text-sm md:text-base"
                         >
                           Start Breathing Exercise
                         </button>
                       </div>
                     ) : (
                       <div className="text-center">
-                        <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-2">{breathingCount}</div>
-                        <div className="text-base md:text-lg text-blue-700 font-medium">
+                        <div className="text-2xl md:text-3xl font-bold text-blue-400 mb-2">{breathingCount}</div>
+                        <div className="text-base md:text-lg text-blue-300 font-medium">
                           {breathingPhase === "inhale" && "Breathe In Slowly..."}
                           {breathingPhase === "hold" && "Hold Gently..."}
                           {breathingPhase === "exhale" && "Breathe Out & Release..."}
                         </div>
-                        <div className="mt-4 w-full bg-blue-200 rounded-full h-2">
+                        <div className="mt-4 w-full bg-blue-800 rounded-full h-2">
                           <div
                             className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-1000"
                             style={{ width: `${((4 - breathingCount) / 4) * 100}%` }}
@@ -599,7 +599,7 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
                   <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-6">
                     <button
                       onClick={() => setShowHugModal(false)}
-                      className="px-6 md:px-8 py-2 md:py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-xl hover:from-pink-600 hover:to-red-600 transition-all duration-200 font-medium shadow-lg transform hover:scale-105 text-sm md:text-base"
+                      className="px-6 md:px-8 py-2 md:py-3 bg-gradient-to-r from-pink-600 to-red-600 text-white rounded-xl hover:from-pink-700 hover:to-red-700 transition-all duration-200 font-medium shadow-lg transform hover:scale-105 text-sm md:text-base"
                     >
                       Thank You
                     </button>
@@ -608,31 +608,31 @@ export default function EmpathyAssistant({ onClose }: EmpathyAssistantProps) {
                         setShowHugModal(false)
                         handleMoodSwap()
                       }}
-                      className="px-6 md:px-8 py-2 md:py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl hover:from-purple-600 hover:to-blue-600 transition-all duration-200 font-medium shadow-lg transform hover:scale-105 text-sm md:text-base"
+                      className="px-6 md:px-8 py-2 md:py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-200 font-medium shadow-lg transform hover:scale-105 text-sm md:text-base"
                     >
                       I Feel Better Now
                     </button>
                   </div>
 
                   {/* Additional Comfort Options */}
-                  <div className="pt-4 md:pt-6 border-t border-gray-200">
-                    <p className="text-xs md:text-sm text-gray-600 mb-3">Need more comfort?</p>
+                  <div className="pt-4 md:pt-6 border-t border-gray-600">
+                    <p className="text-xs md:text-sm text-gray-400 mb-3">Need more comfort?</p>
                     <div className="flex flex-wrap gap-2 justify-center">
                       <button
                         onClick={() => window.open("https://www.youtube.com/watch?v=1ZYbU82GVz4", "_blank")}
-                        className="px-3 md:px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-all duration-200 text-xs md:text-sm"
+                        className="px-3 md:px-4 py-2 bg-red-900/50 text-red-300 rounded-lg hover:bg-red-800/50 transition-all duration-200 text-xs md:text-sm border border-red-700"
                       >
                         Calming Music
                       </button>
                       <button
                         onClick={() => alert("Remember to drink some water and take care of yourself!")}
-                        className="px-3 md:px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-all duration-200 text-xs md:text-sm"
+                        className="px-3 md:px-4 py-2 bg-blue-900/50 text-blue-300 rounded-lg hover:bg-blue-800/50 transition-all duration-200 text-xs md:text-sm border border-blue-700"
                       >
                         Self-Care Reminder
                       </button>
                       <button
                         onClick={() => alert("You've got this! Take one small step at a time.")}
-                        className="px-3 md:px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-all duration-200 text-xs md:text-sm"
+                        className="px-3 md:px-4 py-2 bg-green-900/50 text-green-300 rounded-lg hover:bg-green-800/50 transition-all duration-200 text-xs md:text-sm border border-green-700"
                       >
                         Encouragement
                       </button>
