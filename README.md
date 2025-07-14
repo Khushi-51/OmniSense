@@ -30,7 +30,7 @@ OmniSense bridges the emotional gap, creating a retail experience that listens, 
 ## 🚀Installation
 
 - Clone the Repository:  
-git clone https://github.com/Khushi-51/OmniSense.git
+git clone https://github.com/Khushi-51/OmniSense.git <br>
 cd OmniSense
 
 - Install Dependencies:  
