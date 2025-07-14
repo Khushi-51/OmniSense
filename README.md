@@ -8,17 +8,17 @@ OmniSense is an AI-powered, emotion-aware shopping assistant developed for the W
 
 ## Problem Statement
 In today’s fast-paced retail environments, shoppers often feel anxious, tired, or overwhelmed, leading to rushed decisions, confusion over product labels, or disengagement. OmniSense targets:  
-Elderly and visually impaired individuals  
-Busy parents, students, or neurodiverse users  
-Anyone feeling emotionally drained or confused by health buzzwords
+- Elderly and visually impaired individuals  
+- Busy parents, students, or neurodiverse users  
+- Anyone feeling emotionally drained or confused by health buzzwords
 OmniSense bridges the emotional gap, creating a retail experience that listens, understands, and uplifts.
 
 ## Features
 - AR Mood Detection:Detects customer mood in real-time using front camera via face-api.js or MediaPipe. Suggests tailored product bundles, e.g., “You look tired — here’s a Cozy Kit: Blanket + Tea + Eye Mask.”
 - Voice-to-Vision Mode:Users can voice commands like “Show me keto snacks under ₹200,” and the AI responds with friendly, voiced suggestions and AR-style visual cues (mocked).
-Predictive Checkout Concierge:Tracks cart, dietary preferences, and mood in real-time. At checkout, offers suggestions like, “You stayed under budget! Want to add a scented candle for ₹89?”
-Smart Product Explainer:Simplifies complex product terms (e.g., “low-GI,” “fortified oats,” “cold-pressed”) with tap-to-explain, layman-friendly definitions.
-Comfort Bundles & Mood Uplift:Crafts mood-based bundles like “Relax Kit” or “Energize Pack” tailored to user’s budget and emotional state. Includes self-care tips (e.g., “Text a friend 💌”), mood playlists, or uplifting jokes/missions.
+- Predictive Checkout Concierge:Tracks cart, dietary preferences, and mood in real-time. At checkout, offers suggestions like, “You stayed under budget! Want to add a scented candle for ₹89?”
+- Smart Product Explainer:Simplifies complex product terms (e.g., “low-GI,” “fortified oats,” “cold-pressed”) with tap-to-explain, layman-friendly definitions.
+- Comfort Bundles & Mood Uplift:Crafts mood-based bundles like “Relax Kit” or “Energize Pack” tailored to user’s budget and emotional state. Includes self-care tips (e.g., “Text a friend 💌”), mood playlists, or uplifting jokes/missions.
 
 ## Tech Stack
 Frontend: React.js (Next.js), Tailwind CSS  
@@ -65,4 +65,4 @@ Contact
 Feel free to connect at:📧 kritikasawhney1010@gmail.com
 🔗 LinkedIn
 🎥 YouTube Demo Link (2-minute walkthrough)  
-💙 Built With Empathy By: Kritika Sawhney & Team
+💙 Built With Empathy By Team : Sparkers
