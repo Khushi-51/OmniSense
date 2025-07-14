@@ -22,9 +22,13 @@ export function VoiceRecognition({ onCommand, isProcessing, response }: VoiceRec
       const latestCommand = commands[commands.length - 1]
       if (latestCommand.text.trim().length >= 2 && latestCommand.confidence > 0.7) {
         onCommand(latestCommand.text.trim())
+        // Stop listening after successful command
+        if (isListening) {
+          stopListening()
+        }
       }
     }
-  }, [commands, onCommand])
+  }, [commands, onCommand, isListening, stopListening])
 
   const handleToggleListening = () => {
     if (isListening) {
@@ -98,17 +102,17 @@ export function VoiceRecognition({ onCommand, isProcessing, response }: VoiceRec
 
       {/* Quick Commands */}
       <div className="grid grid-cols-2 gap-2">
-        <Button variant="outline" size="sm" onClick={() => onCommand("find organic bread")} className="text-xs">
-          Find Organic Bread
+        <Button variant="outline" size="sm" onClick={() => onCommand("organic brown bread")} className="text-xs">
+          Organic Brown Bread
         </Button>
-        <Button variant="outline" size="sm" onClick={() => onCommand("dairy free milk")} className="text-xs">
-          Dairy-Free Milk
+        <Button variant="outline" size="sm" onClick={() => onCommand("dairy-free almond milk")} className="text-xs">
+          Dairy-Free Almond Milk
         </Button>
-        <Button variant="outline" size="sm" onClick={() => onCommand("where are bananas")} className="text-xs">
-          Find Bananas
+        <Button variant="outline" size="sm" onClick={() => onCommand("organic apples")} className="text-xs">
+          Organic Apples
         </Button>
-        <Button variant="outline" size="sm" onClick={() => onCommand("cheap protein")} className="text-xs">
-          Cheap Protein
+        <Button variant="outline" size="sm" onClick={() => onCommand("protein rich paneer")} className="text-xs">
+          Protein Rich Paneer
         </Button>
       </div>
     </div>

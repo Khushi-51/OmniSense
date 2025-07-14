@@ -40,6 +40,8 @@ export function VoiceToVisionAssistant() {
   const { speak, stop, isSpeaking } = useTextToSpeech();
   const lastSpokenRef = useRef<string>("");
   const speechTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const productResultsRef = useRef<HTMLDivElement | null>(null);
+
 
   // Accessibility settings
   const [audioEnabled, setAudioEnabled] = useState(true);
@@ -70,6 +72,8 @@ export function VoiceToVisionAssistant() {
   const handleVoiceCommand = async (command: string) => {
   setIsProcessing(true)
   setSearchStatus("Processing...")
+  
+  console.log("Voice command received:", command)
 
   try {
     await new Promise((resolve) => setTimeout(resolve, 1000))
@@ -81,23 +85,37 @@ export function VoiceToVisionAssistant() {
         product.description.toLowerCase().includes(command.toLowerCase()) ||
         product.dietary.some((diet) => diet.toLowerCase().includes(command.toLowerCase())),
     )
+    
+    console.log("Search results:", results)
 
     if (results.length > 0) {
       const topProduct = results[0]
       setProducts(results.slice(0, 10))
       setHighlightedProduct(topProduct)
       setVoiceFound(results.length)
+      
+      console.log("Products set:", results.slice(0, 10))
 
       const responseText = `Found ${results.length} products matching "${command}". The top result is ${topProduct.name} by ${topProduct.brand}, priced at ₹${topProduct.price}. It is located in aisle ${topProduct.location.aisle}, ${topProduct.location.shelf} shelf.`
       
       setResponse(responseText)
       handleSpeech(responseText)
+      
+      // Close voice modal after successful search
+      setShowVoice(false)
+      if (productResultsRef.current) {
+        productResultsRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
     } else {
       const responseText = `No products found matching "${command}". Try searching for categories like organic, gluten-free, or dairy.`
       setResponse(responseText)
       handleSpeech(responseText)
       setProducts([])
       setVoiceFound(0)
+      
+      // Close voice modal even if no results found
+      setShowVoice(false)
     }
 
     setSearchStatus("Ready")
@@ -107,6 +125,9 @@ export function VoiceToVisionAssistant() {
     setResponse(errorText)
     handleSpeech(errorText)
     setSearchStatus("Ready")
+    
+    // Close voice modal on error as well
+    setShowVoice(false)
   } finally {
     setIsProcessing(false)
   }
@@ -184,28 +205,28 @@ export function VoiceToVisionAssistant() {
           </h3>
           <div className="grid grid-cols-2 gap-3">
             <Button
-              onClick={() => handleVoiceCommand("find organic bread")}
+              onClick={() => handleVoiceCommand("organic brown bread")}
               className="bg-green-500 hover:bg-green-600 text-white font-medium py-3 rounded-lg"
             >
-              Find Organic Bread
+              Find Organic Brown Bread
             </Button>
             <Button
-              onClick={() => handleVoiceCommand("dairy free milk")}
+              onClick={() => handleVoiceCommand("dairy-free almond milk")}
               className="bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 rounded-lg"
             >
-              Dairy-Free Milk
+              Dairy-Free Almond Milk
             </Button>
             <Button
-              onClick={() => handleVoiceCommand("find bananas")}
+              onClick={() => handleVoiceCommand("organic apples")}
               className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 rounded-lg"
             >
-              Find Bananas
+              Find Organic Apples
             </Button>
             <Button
-              onClick={() => handleVoiceCommand("cheap protein")}
+              onClick={() => handleVoiceCommand("protein rich paneer")}
               className="bg-pink-500 hover:bg-pink-600 text-white font-medium py-3 rounded-lg"
             >
-              Cheap Protein
+              Protein Rich Paneer
             </Button>
           </div>
         </div>
@@ -274,7 +295,7 @@ export function VoiceToVisionAssistant() {
                 <div className="bg-purple-500 p-2 rounded-lg w-fit mx-auto mb-2">
                   <Package className="w-5 h-5 text-white" />
                 </div>
-                <div className="text-2xl font-bold text-purple-600">1000</div>
+                <div className="text-2xl font-bold text-purple-600">20</div>
                 <div className="text-xs text-purple-600 font-medium">
                   Database
                 </div>
@@ -359,13 +380,13 @@ export function VoiceToVisionAssistant() {
                     variant="secondary"
                     className="bg-blue-200 text-blue-800 text-xs"
                   >
-                    "find organic bread"
+                    "organic brown bread"
                   </Badge>
                   <Badge
                     variant="secondary"
                     className="bg-blue-200 text-blue-800 text-xs"
                   >
-                    "dairy-free milk"
+                    "dairy-free almond milk"
                   </Badge>
                 </div>
               </div>
@@ -433,107 +454,110 @@ export function VoiceToVisionAssistant() {
         )}
 
         {/* Product Results */}
-        {products.length > 0 ? (
-          <Card className="mb-6 bg-white shadow-lg rounded-2xl">
-            <CardHeader>
-              <CardTitle className="text-xl">🛍️ Product Results</CardTitle>
-              <p className="text-sm text-gray-600">
-                Found {products.length} products
-              </p>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {products.map((product) => (
-                  <div
-                    key={product.id}
-                    onClick={() => handleProductSelect(product)}
-                    className={`border rounded-lg p-4 cursor-pointer transition-all hover:shadow-md ${
-                      highlightedProduct?.id === product.id
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                  >
-                    <div className="flex items-start gap-3">
-                      <img
-                        src={
-                          product.image || "/placeholder.svg?height=60&width=60"
-                        }
-                        alt={product.name}
-                        className="w-16 h-16 object-cover rounded"
-                      />
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-sm truncate">
-                          {product.name}
-                        </h3>
-                        <p className="text-xs text-gray-500">{product.brand}</p>
-                        <p className="text-sm font-bold text-green-600">
-                          ₹{product.price}
-                        </p>
-                        <div className="flex items-center gap-1 mt-1">
-                          <MapPin className="w-3 h-3 text-gray-400" />
-                          <span className="text-xs text-gray-500">
-                            Aisle {product.location.aisle}
-                          </span>
-                        </div>
-                        {product.dietary.length > 0 && (
-                          <div className="flex flex-wrap gap-1 mt-2">
-                            {product.dietary.slice(0, 2).map((diet) => (
-                              <Badge
-                                key={diet}
-                                variant="secondary"
-                                className="text-xs"
-                              >
-                                <Leaf className="w-2 h-2 mr-1" />
-                                {diet}
-                              </Badge>
-                            ))}
+        <div ref={productResultsRef}>
+          {products.length > 0 ? (
+            <Card className="mb-6 bg-white shadow-lg rounded-2xl">
+              <CardHeader>
+                <CardTitle className="text-xl">🛍️ Product Results</CardTitle>
+                <p className="text-sm text-gray-600">
+                  Found {products.length} products
+                </p>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {products.map((product) => (
+                    <div
+                      key={product.id}
+                      onClick={() => handleProductSelect(product)}
+                      className={`border rounded-lg p-4 cursor-pointer transition-all hover:shadow-md ${
+                        highlightedProduct?.id === product.id
+                          ? "border-blue-500 bg-blue-50"
+                          : "border-gray-200 hover:border-gray-300"
+                      }`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <img
+                          src={
+                            product.image || "/placeholder.svg?height=60&width=60"
+                          }
+                          alt={product.name}
+                          className="w-16 h-16 object-cover rounded"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-sm truncate">
+                            {product.name}
+                          </h3>
+                          <p className="text-xs text-gray-500">{product.brand}</p>
+                          <p className="text-sm font-bold text-green-600">
+                            ₹{product.price}
+                          </p>
+                          <div className="flex items-center gap-1 mt-1">
+                            <MapPin className="w-3 h-3 text-gray-400" />
+                            <span className="text-xs text-gray-500">
+                              Aisle {product.location.aisle}
+                            </span>
                           </div>
-                        )}
+                          {product.dietary.length > 0 && (
+                            <div className="flex flex-wrap gap-1 mt-2">
+                              {product.dietary.slice(0, 2).map((diet) => (
+                                <Badge
+                                  key={diet}
+                                  variant="secondary"
+                                  className="text-xs"
+                                >
+                                  <Leaf className="w-2 h-2 mr-1" />
+                                  {diet}
+                                </Badge>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        ) : (
-          <Card className="mb-6 bg-white shadow-lg rounded-2xl">
-            <CardContent className="text-center py-12">
-              <div className="bg-gray-100 p-6 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-                <Package className="w-10 h-10 text-gray-400" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                No Products Found
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Try using voice commands or search for different terms
-              </p>
-              <div className="flex flex-wrap justify-center gap-2">
-                <Badge
-                  variant="outline"
-                  className="cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleVoiceCommand("organic apples")}
-                >
-                  "organic apples"
-                </Badge>
-                <Badge
-                  variant="outline"
-                  className="cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleVoiceCommand("gluten-free bread")}
-                >
-                  "gluten-free bread"
-                </Badge>
-                <Badge
-                  variant="outline"
-                  className="cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleVoiceCommand("dairy-free milk")}
-                >
-                  "dairy-free milk"
-                </Badge>
-              </div>
-            </CardContent>
-          </Card>
-        )}
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card className="mb-6 bg-white shadow-lg rounded-2xl">
+              <CardContent className="text-center py-12">
+                <div className="bg-gray-100 p-6 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                  <Package className="w-10 h-10 text-gray-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                  No Products Found
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Try using voice commands or search for different terms
+                </p>
+                <div className="flex flex-wrap justify-center gap-2">
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer hover:bg-gray-100"
+                    onClick={() => handleVoiceCommand("organic apples")}
+                  >
+                    "organic apples"
+                  </Badge>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer hover:bg-gray-100"
+                    onClick={() => handleVoiceCommand("gluten-free oats bread")}
+                  >
+                    "gluten-free bread"
+                  </Badge>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer hover:bg-gray-100"
+                    onClick={() => handleVoiceCommand("dairy-free almond milk")}
+                  >
+                    "dairy-free milk"
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+
 
         {/* Voice Modal */}
         {showVoice && (
