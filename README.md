@@ -14,6 +14,9 @@ OmniSense bridges the emotional gap, creating a retail experience that listens, 
 
 ## 🌟Features
 - 🎭AR Mood Detection:Detects customer mood in real-time using front camera via face-api.js or MediaPipe. Suggests tailored product bundles, e.g., “You look tired — here’s a Cozy Kit: Blanket + Tea + Eye Mask.”
+  <img width="1280" height="626" alt="image" src="https://github.com/user-attachments/assets/778925ec-a203-4058-bcc0-2455b04eeb8e" />
+  <img width="1280" height="638" alt="image" src="https://github.com/user-attachments/assets/5d91216e-a292-4bc7-a2f4-16a0a0bd2165" />
+
 - 🎙️Voice-to-Vision Mode:Users can voice commands like “Show me keto snacks under ₹200,” and the AI responds with friendly, voiced suggestions and AR-style visual cues (mocked).
   <img width="1232" height="909" alt="image" src="https://github.com/user-attachments/assets/f663036e-18d2-43fd-800b-49ce2fb25fb1" />
 
