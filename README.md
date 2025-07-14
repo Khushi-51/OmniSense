@@ -2,8 +2,7 @@
 ## Overview <br>
 OmniSense is an AI-powered, emotion-aware shopping assistant developed for the Walmart Sparkathon 2025, designed to help customers make better, kinder, and smarter purchasing decisions based on their mood, needs, and budget. By addressing the emotional and practical challenges faced by shoppers, OmniSense creates a personalized, uplifting retail experience.
 
-
-### 🔗 Live Demo: https://omni-sense.vercel.app/🚀 
+🔗 Live Demo: https://omni-sense.vercel.app/🚀 
 One-Line Pitch: AI-powered assistant for accessible independence. Voice, emotion, AR – all in sync, for everyone.
 
 ## Problem Statement
@@ -60,7 +59,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ## Developed for Walmart Sparkathon 2025.  
 Thanks to the open-source community for tools and libraries like face-api.js, and Web Speech API.  
 
-## Contact
+## Contact <br>
 Feel free to connect at:📧 kritikasawhney1010@gmail.com <br>
 🔗 LinkedIn : https://www.linkedin.com/in/kritika-sawhney/ <br>
 🎥 YouTube Demo Link :   <br>
