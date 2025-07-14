@@ -60,8 +60,8 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ## Developed for Walmart Sparkathon 2025.  
 Thanks to the open-source community for tools and libraries like face-api.js, and Web Speech API.  
 
-Contact
-Feel free to connect at:📧 kritikasawhney1010@gmail.com
-🔗 LinkedIn : https://www.linkedin.com/in/kritika-sawhney/
-🎥 YouTube Demo Link :   
+## Contact
+Feel free to connect at:📧 kritikasawhney1010@gmail.com <br>
+🔗 LinkedIn : https://www.linkedin.com/in/kritika-sawhney/ <br>
+🎥 YouTube Demo Link :   <br>
 💙 Built With Empathy By Team : Sparkers
