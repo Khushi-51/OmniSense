@@ -76,7 +76,6 @@ export default function PredictiveCheckoutPage() {
     personalizedMessage: "",
     notifications: [],
   })
-
   const [searchFilters, setSearchFilters] = useState<SearchFiltersType>({})
   const [searchResults, setSearchResults] = useState(SearchEngine.search())
   const [showFilters, setShowFilters] = useState(false)
@@ -100,7 +99,6 @@ export default function PredictiveCheckoutPage() {
       budget,
       recommendations,
     )
-
     setCheckoutState((prev) => ({
       ...prev,
       budget,
@@ -122,12 +120,10 @@ export default function PredictiveCheckoutPage() {
       message,
       timestamp: Date.now(),
     }
-
     setCheckoutState((prev) => ({
       ...prev,
       notifications: [...prev.notifications, notification],
     }))
-
     setTimeout(() => {
       dismissNotification(notification.id)
     }, 4000)
@@ -152,7 +148,6 @@ export default function PredictiveCheckoutPage() {
   const handleUpdateCart = (cart: CartItem[]) => {
     const oldTotal = checkoutState.cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
     const newTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-
     setCheckoutState((prev) => ({ ...prev, cart }))
 
     if (newTotal > oldTotal) {
@@ -181,7 +176,6 @@ export default function PredictiveCheckoutPage() {
 
   const handleAddRecommendationToCart = (recommendation: Recommendation) => {
     const existingItem = checkoutState.cart.find((item) => item.name === recommendation.name)
-
     if (existingItem) {
       const updatedCart = checkoutState.cart.map((item) =>
         item.id === existingItem.id ? { ...item, quantity: item.quantity + 1 } : item,
@@ -200,7 +194,6 @@ export default function PredictiveCheckoutPage() {
         rating: recommendation.rating,
         inStock: true,
       }
-
       const updatedCart = [...checkoutState.cart, newItem]
       handleUpdateCart(updatedCart)
     }
@@ -208,7 +201,6 @@ export default function PredictiveCheckoutPage() {
 
   const handleAddProductToCart = (product: Product) => {
     const existingItem = checkoutState.cart.find((item) => item.name === product.name)
-
     if (existingItem) {
       const updatedCart = checkoutState.cart.map((item) =>
         item.id === existingItem.id ? { ...item, quantity: item.quantity + 1 } : item,
@@ -227,7 +219,6 @@ export default function PredictiveCheckoutPage() {
         rating: product.rating,
         inStock: product.inStock,
       }
-
       const updatedCart = [...checkoutState.cart, newItem]
       handleUpdateCart(updatedCart)
     }
@@ -249,13 +240,13 @@ export default function PredictiveCheckoutPage() {
   const getNotificationStyle = (type: Notification["type"]) => {
     switch (type) {
       case "success":
-        return "bg-green-50 border-green-200 text-green-800"
+        return "bg-green-900/50 border-green-700 text-green-200"
       case "warning":
-        return "bg-yellow-50 border-yellow-200 text-yellow-800"
+        return "bg-yellow-900/50 border-yellow-700 text-yellow-200"
       case "error":
-        return "bg-red-50 border-red-200 text-red-800"
+        return "bg-red-900/50 border-red-700 text-red-200"
       case "info":
-        return "bg-blue-50 border-blue-200 text-blue-800"
+        return "bg-blue-900/50 border-blue-700 text-blue-200"
     }
   }
 
@@ -267,7 +258,7 @@ export default function PredictiveCheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 text-gray-100">
       {/* Compact Notifications */}
       <div className="fixed top-4 right-4 z-50 space-y-2 max-w-xs">
         {checkoutState.notifications.map((notification) => (
@@ -294,45 +285,46 @@ export default function PredictiveCheckoutPage() {
             <Badge variant="secondary" className="mb-4">
               AI-Powered Shopping Assistant
             </Badge>
-            <h1 className="text-3xl lg:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              🛒 Predictive Checkout Concierge
+            <h1 className="text-3xl lg:text-4xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              {" "}
+              🛒 Predictive Checkout Concierge{" "}
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              AI-powered shopping with smart recommendations and budget tracking
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              AI-powered shopping with smart recommendations and budget tracking{" "}
             </p>
           </div>
 
           {/* Compact Stats & Search Row */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-200 p-6 mb-6 shadow-sm">
+          <div className="bg-gray-800/80 backdrop-blur-sm rounded-2xl border border-gray-700 p-6 mb-6 shadow-sm">
             {/* Stats Row */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-xl mx-auto mb-2">
-                  <ShoppingBag className="w-6 h-6 text-blue-600" />
+                <div className="flex items-center justify-center w-12 h-12 bg-blue-900 rounded-xl mx-auto mb-2">
+                  <ShoppingBag className="w-6 h-6 text-blue-400" />
                 </div>
-                <p className="text-2xl font-bold text-gray-900">{totalItems}</p>
-                <p className="text-sm text-gray-600">Cart Items</p>
+                <p className="text-2xl font-bold text-gray-100">{totalItems}</p>
+                <p className="text-sm text-gray-400">Cart Items</p>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-xl mx-auto mb-2">
-                  <Target className="w-6 h-6 text-green-600" />
+                <div className="flex items-center justify-center w-12 h-12 bg-green-900 rounded-xl mx-auto mb-2">
+                  <Target className="w-6 h-6 text-green-400" />
                 </div>
-                <p className="text-2xl font-bold text-gray-900">{checkoutState.budget.percentage.toFixed(0)}%</p>
-                <p className="text-sm text-gray-600">Budget Used</p>
+                <p className="text-2xl font-bold text-gray-100">{checkoutState.budget.percentage.toFixed(0)}%</p>
+                <p className="text-sm text-gray-400">Budget Used</p>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-xl mx-auto mb-2">
-                  <Sparkles className="w-6 h-6 text-purple-600" />
+                <div className="flex items-center justify-center w-12 h-12 bg-purple-900 rounded-xl mx-auto mb-2">
+                  <Sparkles className="w-6 h-6 text-purple-400" />
                 </div>
-                <p className="text-2xl font-bold text-gray-900">{checkoutState.recommendations.length}</p>
-                <p className="text-sm text-gray-600">AI Suggestions</p>
+                <p className="text-2xl font-bold text-gray-100">{checkoutState.recommendations.length}</p>
+                <p className="text-sm text-gray-400">AI Suggestions</p>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-xl mx-auto mb-2">
-                  <TrendingUp className="w-6 h-6 text-orange-600" />
+                <div className="flex items-center justify-center w-12 h-12 bg-orange-900 rounded-xl mx-auto mb-2">
+                  <TrendingUp className="w-6 h-6 text-orange-400" />
                 </div>
-                <p className="text-2xl font-bold text-gray-900">₹{checkoutState.budget.savings.toFixed(0)}</p>
-                <p className="text-sm text-gray-600">Saved</p>
+                <p className="text-2xl font-bold text-gray-100">₹{checkoutState.budget.savings.toFixed(0)}</p>
+                <p className="text-sm text-gray-400">Saved</p>
               </div>
             </div>
 
@@ -352,13 +344,13 @@ export default function PredictiveCheckoutPage() {
             {/* Left Column - Main Content */}
             <div className="lg:col-span-2 space-y-6">
               {/* Tab Navigation */}
-              <div className="flex space-x-1 bg-gray-100 backdrop-blur-sm rounded-xl p-1 border border-gray-200">
+              <div className="flex space-x-1 bg-gray-800/80 backdrop-blur-sm rounded-xl p-1 border border-gray-700">
                 <button
                   onClick={() => setActiveTab("products")}
                   className={`flex-1 px-4 py-3 rounded-lg font-medium transition-all ${
                     activeTab === "products"
-                      ? "bg-blue-600 text-white shadow-lg"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-200"
+                      ? "bg-cyan-600 text-white shadow-lg"
+                      : "text-gray-300 hover:text-gray-100 hover:bg-gray-700"
                   }`}
                 >
                   Products ({searchResults.totalCount})
@@ -367,8 +359,8 @@ export default function PredictiveCheckoutPage() {
                   onClick={() => setActiveTab("cart")}
                   className={`flex-1 px-4 py-3 rounded-lg font-medium transition-all relative ${
                     activeTab === "cart"
-                      ? "bg-blue-600 text-white shadow-lg"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-200"
+                      ? "bg-cyan-600 text-white shadow-lg"
+                      : "text-gray-300 hover:text-gray-100 hover:bg-gray-700"
                   }`}
                 >
                   Cart ({totalItems})
@@ -378,8 +370,8 @@ export default function PredictiveCheckoutPage() {
                   onClick={() => setActiveTab("recommendations")}
                   className={`flex-1 px-4 py-3 rounded-lg font-medium transition-all relative ${
                     activeTab === "recommendations"
-                      ? "bg-blue-600 text-white shadow-lg"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-200"
+                      ? "bg-cyan-600 text-white shadow-lg"
+                      : "text-gray-300 hover:text-gray-100 hover:bg-gray-700"
                   }`}
                 >
                   AI Picks ({checkoutState.recommendations.length})
@@ -390,19 +382,17 @@ export default function PredictiveCheckoutPage() {
               </div>
 
               {/* Tab Content */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 min-h-[600px] shadow-sm">
+              <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl border border-gray-700 min-h-[600px] shadow-sm">
                 {activeTab === "products" && (
                   <div className="p-6">
                     <ProductGrid products={searchResults.products} onAddToCart={handleAddProductToCart} />
                   </div>
                 )}
-
                 {activeTab === "cart" && (
                   <div className="p-6">
                     <CartTracker cart={checkoutState.cart} onUpdateCart={handleUpdateCart} />
                   </div>
                 )}
-
                 {activeTab === "recommendations" && (
                   <div className="p-6">
                     <RecommendationComponent
