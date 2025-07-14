@@ -8,10 +8,10 @@
 
 ## Problem Statement
 ### In today’s fast-paced retail environments, shoppers often feel anxious, tired, or overwhelmed, leading to rushed decisions, confusion over product labels, or disengagement. OmniSense targets:  
-Elderly and visually impaired individuals  
-Busy parents, students, or neurodiverse users  
-Anyone feeling emotionally drained or confused by health buzzwords
-OmniSense bridges the emotional gap, creating a retail experience that listens, understands, and uplifts.
+### Elderly and visually impaired individuals  
+### Busy parents, students, or neurodiverse users  
+### Anyone feeling emotionally drained or confused by health buzzwords
+### OmniSense bridges the emotional gap, creating a retail experience that listens, understands, and uplifts.
 
 ## Features
 ### AR Mood Detection:Detects customer mood in real-time using front camera via face-api.js or MediaPipe. Suggests tailored product bundles, e.g., “You look tired — here’s a Cozy Kit: Blanket + Tea + Eye Mask.”
