@@ -14,10 +14,21 @@ OmniSense bridges the emotional gap, creating a retail experience that listens, 
 
 ## 🌟Features
 - 🎭AR Mood Detection:Detects customer mood in real-time using front camera via face-api.js or MediaPipe. Suggests tailored product bundles, e.g., “You look tired — here’s a Cozy Kit: Blanket + Tea + Eye Mask.”
+  <img width="1280" height="626" alt="image" src="https://github.com/user-attachments/assets/778925ec-a203-4058-bcc0-2455b04eeb8e" />
+  <img width="1280" height="638" alt="image" src="https://github.com/user-attachments/assets/5d91216e-a292-4bc7-a2f4-16a0a0bd2165" />
+
 - 🎙️Voice-to-Vision Mode:Users can voice commands like “Show me keto snacks under ₹200,” and the AI responds with friendly, voiced suggestions and AR-style visual cues (mocked).
+  <img width="1232" height="909" alt="image" src="https://github.com/user-attachments/assets/f663036e-18d2-43fd-800b-49ce2fb25fb1" />
+
 - 🤖Predictive Checkout Concierge:Tracks cart, dietary preferences, and mood in real-time. At checkout, offers suggestions like, “You stayed under budget! Want to add a scented candle for ₹89?”
+  <img width="1280" height="667" alt="image" src="https://github.com/user-attachments/assets/a6ce45a3-3231-40d0-bb62-4ed42b43fedf" />
+
 - 🧾Smart Product Explainer:Simplifies complex product terms (e.g., “low-GI,” “fortified oats,” “cold-pressed”) with tap-to-explain, layman-friendly definitions.
+  <img width="1233" height="914" alt="image" src="https://github.com/user-attachments/assets/da45128f-0bda-4227-b456-be5f5dd85198" />
+
 - 🧘Comfort Bundles & Mood Uplift:Crafts mood-based bundles like “Relax Kit” or “Energize Pack” tailored to user’s budget and emotional state. Includes self-care tips (e.g., “Text a friend 💌”), mood playlists, or uplifting jokes/missions.
+  <img width="1280" height="857" alt="image" src="https://github.com/user-attachments/assets/4053965e-807f-492d-be0d-140f09c86850" />
+
 
 ## 🛠Tech Stack
 | Category       | Tech                                                                 |
