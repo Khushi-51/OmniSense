@@ -78,31 +78,6 @@ OmniSense/
 └── package.json                   # Project dependencies and scripts
 ```
 
-## 📸 Screenshots Setup Instructions
-
-To ensure all images are visible to GitHub users, follow these steps:
-
-1. **Save Screenshots**: Take screenshots of each feature and save them in the `images/` folder with these exact names:
-   - `ar-mood-detection-home.png` - AR Mood Detection homepage
-   - `ar-mood-detection-analysis.png` - AR Mood Detection analysis screen
-   - `voice-to-vision.png` - Voice-to-Vision interface
-   - `predictive-checkout.png` - Predictive Checkout screen
-   - `product-explainer.png` - Product Explainer interface
-   - `empathy-assistant.png` - Empathy Assistant modal
-
-2. **Image Requirements**:
-   - Format: PNG or JPG
-   - Recommended size: 1200x800 pixels or similar aspect ratio
-   - Clear, high-quality screenshots showing the key features
-
-3. **Commit Images**: Make sure to commit and push the images to your GitHub repository:
-   ```bash
-   git add images/
-   git commit -m "Add feature screenshots"
-   git push origin main
-   ```
-
-
 ## 📄License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
