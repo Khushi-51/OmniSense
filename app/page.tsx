@@ -101,7 +101,7 @@ const recentActivity = [
 // Animation variants
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] } },
 }
 
 const staggerContainer = {
@@ -121,7 +121,7 @@ export default function HomePage() {
       <nav className="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md border-b border-gray-700 py-4 px-4 md:px-8 lg:px-12 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Award className="w-6 h-6 text-cyan-400" />
-          <span className="text-lg font-bold text-white">VisionAI Shop</span>
+          <span className="text-lg font-bold text-white">OmniSense</span>
         </div>
         <div className="flex items-center gap-4">
           <Link href="#features" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
@@ -145,7 +145,7 @@ export default function HomePage() {
               className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-white mb-4"
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             >
               OmniSense: <span className="text-cyan-400">Shopping, Reimagined</span>
             </motion.h1>
@@ -153,7 +153,7 @@ export default function HomePage() {
               className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
             >
               AI-powered assistant for accessible independence. Voice, emotion, AR – all in sync, for everyone.
             </motion.p>
@@ -161,7 +161,7 @@ export default function HomePage() {
               className="flex justify-center gap-4"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.4 }}
             >
               <Button className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105">
                 <Play className="w-5 h-5 mr-2" />
@@ -208,7 +208,7 @@ export default function HomePage() {
                     <Rocket className="w-7 h-7 text-green-400" /> Solution
                   </h2>
                   <p className="text-base leading-relaxed">
-                    VisionAI Shop uses cutting-edge AI, AR, and intuitive voice interfaces to provide real-time product
+                    OmniSense uses cutting-edge AI, AR, and intuitive voice interfaces to provide real-time product
                     info, emotion-based suggestions, hands-free navigation, and smart checkout. Our platform is built
                     for accessibility, fostering independence and a delightful shopping experience for everyone.
                   </p>
@@ -359,7 +359,7 @@ export default function HomePage() {
               <ExternalLink className="w-5 h-5" />
             </motion.a>
           </div>
-          <div className="text-sm">&copy; 2024 VisionAI Shop. All rights reserved.</div>
+          <div className="text-sm">&copy; 2024 OmniSense. All rights reserved.</div>
         </div>
       </footer>
     </div>
